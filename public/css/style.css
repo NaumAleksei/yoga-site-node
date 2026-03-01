@@ -648,6 +648,7 @@ nav a:hover { color: var(--primary-color); }
     header {
         padding: 10px 20px;
         position: relative; /* ВАЖНО для правильного позиционирования меню */
+        justify-content: space-between; /* Лого слева, бургер справа */
     }
 
     header .logo img {
@@ -663,6 +664,11 @@ nav a:hover { color: var(--primary-color); }
         display: block; /* Показываем только на телефонах */
         cursor: pointer;
         font-size: 1.5rem;
+        order: 2; /* Ставим бургер после логотипа */
+    }
+    
+    header .logo {
+        order: 1; /* Логотип на первом месте */
     }
 
     /* Скрываем обычное меню по умолчанию */
@@ -734,26 +740,6 @@ nav a:hover { color: var(--primary-color); }
         gap: 30px;
     }
 } /* <--- ЭТА СКОБКА ЗАКРЫВАЕТ ВЕСЬ БЛОК @media */
-
-    /* Показываем меню, когда добавлен класс .active */
-    nav.active {
-        display: flex;
-    }
-
-    nav a {
-        margin: 10px 0;
-        text-align: center;
-        width: 100%;
-    }
-
-   .menu-toggle {
-        display: block;
-        cursor: pointer;
-        font-size: 1.5rem;
-        /* Уберите отсюда position: absolute, если он там есть, 
-           чтобы он не прыгал в центр */
-    }
-
 
 /* Скрываем бургер на компьютерах */
 .menu-toggle {
