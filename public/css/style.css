@@ -639,3 +639,54 @@ nav a:hover { color: var(--primary-color); }
     font-size: 0.9rem;
     margin: 0;
 }
+
+/* --- АДАПТИВНАЯ ШАПКА --- */
+@media (max-width: 768px) {
+    header {
+        padding: 10px 20px; /* Уменьшаем отступы по бокам */
+    }
+
+    header .logo img {
+        height: 35px; /* Уменьшаем логотип */
+    }
+
+    .logo {
+        font-size: 1.2rem; /* Уменьшаем шрифт названия */
+    }
+
+    /* Прячем обычное меню */
+    nav {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        background-color: white;
+        flex-direction: column;
+        padding: 20px 0;
+        box-shadow: 0 5px 10px rgba(0,0,0,0.1);
+    }
+
+    /* Показываем меню, когда добавлен класс .active */
+    nav.active {
+        display: flex;
+    }
+
+    nav a {
+        margin: 10px 0;
+        text-align: center;
+        width: 100%;
+    }
+
+    /* Стили для кнопки "Бургер" */
+    .menu-toggle {
+        display: block;
+        cursor: pointer;
+        font-size: 1.5rem;
+    }
+}
+
+/* Скрываем бургер на компьютерах */
+.menu-toggle {
+    display: none;
+}

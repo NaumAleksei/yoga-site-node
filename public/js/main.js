@@ -41,6 +41,27 @@ document.addEventListener("DOMContentLoaded", function() {
     }
 });
 
+document.addEventListener('DOMContentLoaded', () => {
+    const menuToggle = document.getElementById('mobile-menu');
+    const nav = document.querySelector('nav');
+
+    if (menuToggle && nav) {
+        menuToggle.addEventListener('click', () => {
+            nav.classList.toggle('active');
+            // Меняем иконку с трех черточек на крестик
+            menuToggle.innerHTML = nav.classList.contains('active') ? '&#10006;' : '&#9776;';
+        });
+
+        // Закрывать меню при клике на ссылку
+        nav.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                nav.classList.remove('active');
+                menuToggle.innerHTML = '&#9776;';
+            });
+        });
+    }
+});
+
 // Функции закрытия модального окна (вне слушателя событий)
 function closeModal() {
     const modal = document.getElementById('successModal');
