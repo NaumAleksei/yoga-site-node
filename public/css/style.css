@@ -661,10 +661,11 @@ nav a:hover { color: var(--primary-color); }
 
     /* Бургер-меню */
     .menu-toggle {
-        display: block; /* Показываем только на телефонах */
+        display: block !important; /* Убеждаемся, что он показывается */
         cursor: pointer;
-        font-size: 1.5rem;
-        order: 2; /* Ставим бургер после логотипа */
+        font-size: 2rem; /* Сделаем чуть крупнее */
+        color: #333; /* Явный цвет */
+        order: 2; /* Справа от логотипа */
     }
     
     header .logo {
