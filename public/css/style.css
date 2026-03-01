@@ -601,14 +601,32 @@ nav a:hover { color: var(--primary-color); }
     border: 3px solid #f4f6f4; /* Легкая рамка, чтобы лого не сливалось с фоном */
 }
 
-/* Адаптивность для мобилок */
-@media (max-width: 992px) {
-    .price-grid, .action-row {
-        flex-direction: column;
-        grid-template-columns: 1fr;
-        display: flex;
+/* Базовые стили (для компьютеров) */
+.container {
+    width: 80%;
+    margin: 0 auto;
+}
+
+/* Стили для телефонов (экраны меньше 768px) */
+@media (max-width: 768px) {
+    .container {
+        width: 95%; /* Делаем контейнер шире на телефонах */
+    }
+
+    .form-group {
+        flex-direction: column; /* Элементы формы идут друг за другом, а не в ряд */
+    }
+
+    h1 {
+        font-size: 24px; /* Уменьшаем шрифты */
     }
 }
+
+.flex-container {
+    display: flex;
+    flex-wrap: wrap; /* Элементы переносятся на новую строку, если не влезают */
+}
+
 .site-footer {
     padding: 30px 0;
     background-color: #f4f6f4; /* Тот же фон, что и у final-zone, либо чуть темнее */
