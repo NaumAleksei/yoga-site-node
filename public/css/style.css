@@ -667,6 +667,39 @@ nav a:hover { color: var(--primary-color); }
         box-shadow: 0 5px 10px rgba(0,0,0,0.1);
     }
 
+    .price-grid {
+        grid-template-columns: 1fr; /* Вся ширина */
+        gap: 20px;
+        margin-bottom: 40px; /* Уменьшаем отступ снизу */
+    }
+
+    .price-card {
+        padding: 25px; /* Уменьшаем внутренние отступы в карточках */
+    }
+
+    /* Блок контактов и формы: меняем flex на column */
+    .action-row {
+        flex-direction: column; /* Ставим форму и контакты друг под друга */
+        gap: 20px;
+    }
+
+    .contact-form-box, .contact-info-card {
+        padding: 25px; /* Уменьшаем отступы */
+        width: 100%; /* Занимают всю ширину */
+        box-sizing: border-box; /* Чтобы padding не ломал ширину */
+    }
+
+    /* Дополнительные правки для текста на мобильных */
+    .philosophy-text p {
+        font-size: 1.1rem;
+    }
+    
+    .about-grid, .room-grid, .footer-grid {
+        grid-template-columns: 1fr; /* Сетки тоже в одну колонку */
+        gap: 30px;
+    }
+}
+
     /* Показываем меню, когда добавлен класс .active */
     nav.active {
         display: flex;
