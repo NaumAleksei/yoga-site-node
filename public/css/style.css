@@ -640,6 +640,10 @@ nav a:hover { color: var(--primary-color); }
     margin: 0;
 }
 
+.menu-toggle {
+    display: none;
+}
+
 /* --- АДАПТИВНАЯ ШАПКА --- */
 @media (max-width: 768px) {
     header {
@@ -683,6 +687,19 @@ nav a:hover { color: var(--primary-color); }
         gap: 20px;
     }
 
+    .benefits-grid {
+        grid-template-columns: 1fr; /* Одна колонка */
+        gap: 20px; /* Уменьшаем расстояние между карточками */
+    }
+
+    .card {
+        margin-bottom: 10px; /* Отступ между карточками при вертикальном расположении */
+    }
+
+    .card-img-container {
+        height: 200px; /* Немного уменьшаем высоту фото на мобильных */
+    }
+
     .contact-form-box, .contact-info-card {
         padding: 25px; /* Уменьшаем отступы */
         width: 100%; /* Занимают всю ширину */
@@ -711,13 +728,14 @@ nav a:hover { color: var(--primary-color); }
         width: 100%;
     }
 
-    /* Стили для кнопки "Бургер" */
-    .menu-toggle {
+   .menu-toggle {
         display: block;
         cursor: pointer;
         font-size: 1.5rem;
+        /* Уберите отсюда position: absolute, если он там есть, 
+           чтобы он не прыгал в центр */
     }
-}
+
 
 /* Скрываем бургер на компьютерах */
 .menu-toggle {
