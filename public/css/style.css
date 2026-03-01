@@ -639,26 +639,33 @@ nav a:hover { color: var(--primary-color); }
     font-size: 0.9rem;
     margin: 0;
 }
-
 .menu-toggle {
     display: none;
 }
 
-/* --- АДАПТИВНАЯ ШАПКА --- */
+/* --- АДАПТИВНАЯ ШАПКА И МОБИЛЬНЫЕ СТИЛИ --- */
 @media (max-width: 768px) {
     header {
-        padding: 10px 20px; /* Уменьшаем отступы по бокам */
+        padding: 10px 20px;
+        position: relative; /* ВАЖНО для правильного позиционирования меню */
     }
 
     header .logo img {
-        height: 35px; /* Уменьшаем логотип */
+        height: 35px;
     }
 
     .logo {
-        font-size: 1.2rem; /* Уменьшаем шрифт названия */
+        font-size: 1.2rem;
     }
 
-    /* Прячем обычное меню */
+    /* Бургер-меню */
+    .menu-toggle {
+        display: block; /* Показываем только на телефонах */
+        cursor: pointer;
+        font-size: 1.5rem;
+    }
+
+    /* Скрываем обычное меню по умолчанию */
     nav {
         display: none;
         position: absolute;
@@ -669,53 +676,64 @@ nav a:hover { color: var(--primary-color); }
         flex-direction: column;
         padding: 20px 0;
         box-shadow: 0 5px 10px rgba(0,0,0,0.1);
+        z-index: 1000;
     }
 
+    /* Показываем меню, когда добавлен класс .active (через JS) */
+    nav.active {
+        display: flex;
+    }
+
+    nav a {
+        margin: 10px 0;
+        text-align: center;
+        width: 100%;
+    }
+
+    /* --- ОСТАЛЬНЫЕ МОБИЛЬНЫЕ СТИЛИ (ЦЕНЫ, ФОРМЫ) --- */
     .price-grid {
-        grid-template-columns: 1fr; /* Вся ширина */
+        grid-template-columns: 1fr;
         gap: 20px;
-        margin-bottom: 40px; /* Уменьшаем отступ снизу */
+        margin-bottom: 40px;
     }
 
     .price-card {
-        padding: 25px; /* Уменьшаем внутренние отступы в карточках */
+        padding: 25px;
     }
 
-    /* Блок контактов и формы: меняем flex на column */
     .action-row {
-        flex-direction: column; /* Ставим форму и контакты друг под друга */
+        flex-direction: column;
         gap: 20px;
     }
 
     .benefits-grid {
-        grid-template-columns: 1fr; /* Одна колонка */
-        gap: 20px; /* Уменьшаем расстояние между карточками */
+        grid-template-columns: 1fr;
+        gap: 20px;
     }
 
     .card {
-        margin-bottom: 10px; /* Отступ между карточками при вертикальном расположении */
+        margin-bottom: 10px;
     }
 
     .card-img-container {
-        height: 200px; /* Немного уменьшаем высоту фото на мобильных */
+        height: 200px;
     }
 
     .contact-form-box, .contact-info-card {
-        padding: 25px; /* Уменьшаем отступы */
-        width: 100%; /* Занимают всю ширину */
-        box-sizing: border-box; /* Чтобы padding не ломал ширину */
+        padding: 25px;
+        width: 100%;
+        box-sizing: border-box;
     }
 
-    /* Дополнительные правки для текста на мобильных */
     .philosophy-text p {
         font-size: 1.1rem;
     }
     
     .about-grid, .room-grid, .footer-grid {
-        grid-template-columns: 1fr; /* Сетки тоже в одну колонку */
+        grid-template-columns: 1fr;
         gap: 30px;
     }
-}
+} /* <--- ЭТА СКОБКА ЗАКРЫВАЕТ ВЕСЬ БЛОК @media */
 
     /* Показываем меню, когда добавлен класс .active */
     nav.active {
