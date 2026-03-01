@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Yoga Flow | Личный наставник</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+
+<header>
+    <div class="logo">
+    <img src="/images/logo.png" alt="Инструктор йоги">
+    </div>
+    <nav>
+        <a href="#home">Главная</a>
+        <a href="#about">Обо Мне</a>
+        <a href="#yoga-description">Функциональная йога</a>
+        <a href="#expectations">Занятия</a>
+        <a href="#room">Зал</a>
+        <a href="#contacts">Контакты</a>
+        <a href="#prices">Цены</a>
+    </nav>
+</header>
+
+<main>
+    <section id="home" class="hero-slider">
+        <div class="slide active" style="background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('/images/startbanner.jpg');">
+            <div class="hero-content">
+                <h1>Гармония внутри тебя</h1>
+                <p>Начни свой путь к спокойствию сегодня</p>
+                <a href="#register-anchor" class="cta-button">Начать практику</a>
+            </div>
+        </div>
+
+        <div class="slide" style="background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('/images/startbanner1.jpg');">
+            <div class="hero-content">
+                <h1>Сила и гибкость</h1>
+                <p>Занятия для любого уровня подготовки</p>
+                <a href="#contacts" class="cta-button">Узнать больше</a>
+            </div>
+        </div>
+
+        <div class="slide" style="background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('/images/startbanner2.jpg');">
+            <div class="hero-content">
+                <h1>Дыши глубже</h1>
+                <p>Дыши глубже, находи тишину внутри</p>
+                <a href="#register-anchor" class="cta-button">Записаться</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="about" class="about-me-section">
+        <div class="container">
+            <div class="about-grid">
+
+                <div class="text-block">
+                    <span class="subtitle">Ваш проводник в мир йоги</span>
+                    <h2>Марина Наумова</h2>
+
+                    <div class="bio-text">
+                        <p>Привет! Мой путь в йоге начался более 15 лет назад. Сегодня я — сертифицированный инструктор с 3-летним опытом, специализируюсь на <strong>функциональной</strong> и <strong>классической хатха йоге</strong>.</p>
+
+                        <p>На занятиях я комбинирую детальную отстройку асан из метода Айенгара с современными знаниями об анатомии. Моя цель — не просто выполнить позу, а укрепить ваш позвоночник и скорректировать осанку через осознанное движение.</p>
+
+                        <p class="mission-text">Я создаю пространство, где вы учитесь слушать свое тело, находитесь в моменте и отключаетесь от тревог внешнего мира.</p>
+                    </div>
+
+                    <div class="achievements">
+                        <h3>Образование и опыт</h3>
+                        <ul>
+                            <li><span>✦</span> Студия йоги «Ом», курс подготовки преподавателей</li>
+                            <li><span>✦</span> 1000+ часов личной практики</li>
+                            <li><span>✦</span> Специалист по функциональной йоге и ПИР</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="image-block">
+                    <div class="image-wrapper">
+                        <img src="/images/1myphoto.jpg" alt="Марина Наумова — инструктор йоги">
+                        <div class="image-decoration"></div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <section id="yoga-description" class="yoga-description">
+        <div class="container">
+            <div class="functional-box">
+                <h2 class="section-title">О методе</h2>
+
+                <p><strong>Функциональная йога</strong> — это адаптивный стиль, совмещающий традиционные позы йоги с функциональным тренингом. Практика направлена на развитие силы, координации и гибкости.</p>
+
+                <div class="method-highlight">
+                    <p>На своих занятиях я использую метод <strong>постизометрической релаксации (ПИР)</strong>. Это практика, где асаны выстраиваются в последовательности по принципу:</p>
+                    <div class="formula">
+                        напряжение <i class="arrow">→</i> расслабление <i class="arrow">→</i> растяжение
+                    </div>
+                    <p>Такой подход обеспечивает глубокую, безопасную и осознанную проработку тела. Это симбиоз статической силы йоги и физиотерапевтического подхода к снятию мышечных блоков.</p>
+                </div>
+
+                <div class="qa-block">
+                    <h3>В чем суть?</h3>
+                    <p>В отличие от обычной йоги, где растяжка часто бывает пассивной или динамической, <strong>функциональная йога с ПИР</strong> использует физиологический рефлекс: после короткого статического напряжения мышца стремится расслабиться, и в этот момент её можно растянуть значительно глубже и безболезненнее.</p>
+
+                    <p>Такой подход не просто развивает гибкость, но и поддерживает мышцы в здоровом тонусе, улучшает кровообращение, что <strong>критически важно для здоровья спины и суставов</strong>. Это осознанная работа с телом, где результат достигается через знание физиологии, а не через боль.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="expectations" class="benefits-section">
+        <div class="container">
+            <div class="benefits-intro">
+                <div class="philosophy-text">
+                    <span class="quote-mark">“</span>
+                    <p>Цель йоги — не сесть на шпагат или встать на руки, а научиться быть с самим собой в тишине и обрести контроль над <strong>«качелями ума»</strong>.</p>
+                    <p class="sub-philosophy">Почувствовать свое тело изнутри и соединить его с дыханием и сознанием. Быть здесь и сейчас, принимая свои нынешние возможности.</p>
+                    <div class="divider-line"></div>
+                </div>
+
+                <div class="trainer-note">
+                    <p>На занятиях вас ждет медитативная работа. Тренер — лишь <span>проводник</span>, но главное действие происходит внутри вашего ощущения момента.</p>
+                </div>
+            </div>
+
+            <div class="benefits-grid">
+                <div class="card">
+                    <div class="photo-wrapper">
+                        <img src="/images/3block.jpg" alt="Практика" class="card-img">
+                    </div>
+                    <div class="card-content">
+                        <h3>Практика</h3>
+                        <ul>
+                            <li>Проработаем все тело с помощью традиционных асан йоги</li>
+                            <li>Мягко воздействуем на суставы и связки, исключая травмы</li>
+                            <li>Уделим внимание балансам, мышцам пресса и спины</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="photo-wrapper">
+                        <img src="/images/3block1.jpg" alt="Дыхание" class="card-img">
+                    </div>
+                    <div class="card-content">
+                        <h3>Дыхание</h3>
+                        <ul>
+                            <li>Разберем техники пранаямы и управление энергией</li>
+                            <li>Освоим медитацию для снятия стресса</li>
+                            <li>Научимся находиться в моменте «здесь и сейчас»</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="photo-wrapper">
+                        <img src="/images/3block2.jpg" alt="Кому подходит" class="card-img">
+                    </div>
+                    <div class="card-content">
+                        <h3>Кому подходит</h3>
+                        <ul>
+                            <li>Новичкам: упражнения безопасны и адаптируются под вас</li>
+                            <li>Людям с сидячей работой и малоподвижным образом жизни</li>
+                            <li>Тем, кто восстанавливается после травм или болей в суставах</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="room" class="room-section">
+        <div class="container">
+            <div class="room-grid">
+
+                <div class="text-block">
+
+                    <h2>Зал</h2>
+
+                    <div class="bio-text">
+                        <p>В нашем уютном зале есть все, для того чтобы вы почувствовали себя уютно и комфортно. Мы создаем пространство любви.</p>
+
+                    </div>
+                </div>
+
+                <div class="image-block">
+                    <div class="image-wrapper">
+                        <img src="/images/room.png" alt="Марина Наумова — инструктор йоги">
+                        <div class="image-decoration"></div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+            <section id="prices" class="final-zone">
+            <div id="contacts" style="position: absolute; margin-top: -100px;"></div>
+        <div class="container">
+            <h2 class="section-title">Стоимость занятий</h2>
+            <div class="price-grid">
+                <div class="price-card">
+                    <h3>Старт</h3>
+                    <ul class="price-features">
+                        <li>Пробное <span>400 ₽</span></li>
+                        <li>Разовое <span>900 ₽</span></li>
+                    </ul>
+                    <p class="price-note">1 посещение любой группы</p>
+                    <a href="#register-anchor" class="price-btn">Выбрать</a>
+                </div>
+
+                <div class="price-card featured">
+                    <span class="badge">Популярно</span>
+                    <h3>Абонементы</h3>
+                    <ul class="price-features">
+                        <li>4 занятия <span>2800 ₽</span></li>
+                        <li>8 занятий <span>3600 ₽</span></li>
+                        <li>12 занятий <span>4560 ₽</span></li>
+                    </ul>
+                    <p class="price-note">Срок 30 дней. Любые направления.</p>
+                    <a href="#register-anchor" class="price-btn">Оформить</a>
+                </div>
+
+                <div class="price-card">
+                    <h3>Индивидуально</h3>
+                    <ul class="price-features">
+                        <li>Лично <span>2000 ₽</span></li>
+                        <li>Онлайн <span>1500 ₽</span></li>
+                        <li>Онлайн (8 занятий) <span>3500 ₽</span></li>
+                    </ul>
+                    <p class="price-note">Персональный подход и комфорт.</p>
+                    <a href="#register-anchor" class="price-btn">Записаться</a>
+                </div>
+            </div>
+
+            <div id="register-anchor" style="padding-top: 80px;"></div>
+
+            <div class="action-row">
+                <div class="contact-form-box">
+                    <h2>Записаться</h2>
+                    <form class="yoga-form">
+                        <input type="text" name="name" placeholder="Ваше имя" required>
+                        <input type="email" name="email" placeholder="Ваш Email" required>
+                        <input type="tel" name="phone" placeholder="Номер телефона" required>
+                        <button type="submit" class="cta-button">Отправить заявку</button>
+                    </form>
+                </div>
+
+                <div class="contact-info-card">
+                    <h2>Контакты</h2>
+                    <div class="info-item">Адрес: <span>ул. Рабоче-Крестьянская, д. 25</span></div>
+                    <div class="info-item">Телефон: <span>+7 (929) 788-05-71</span></div>
+                    <div class="info-item">Email: <span>mvnaumova@mail.ru</span></div>
+                    <div class="work-time">Время работы:   <span>Пн — Вс: 10:00 – 20:00<span></span></div>
+                    <img src="/images/contactlogo.png" alt="Марина" class="mini-logo">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div id="successModal" class="modal-overlay">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <div class="modal-icon">✔</div>
+            <h2>Успешно!</h2>
+            <p>Вы записались на йогу. Марина свяжется с вами в ближайшее время.</p>
+            <button onclick="closeModal()" class="cta-button">Отлично</button>
+        </div>
+    </div>
+
+        <div id="successModal" class="modal-overlay">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <div class="modal-icon">✔</div>
+            <h2>Успешно!</h2>
+            <p>Вы записались на йогу. Марина свяжется с вами в ближайшее время.</p>
+            <button onclick="closeModal()" class="cta-button">Отлично</button>
+        </div>
+    </div>
+
+    <footer class="site-footer">
+        <div class="container">
+            <p>&copy; 2026 Наумовы Марина и Алексей. Все права защищены.</p>
+        </div>
+    </footer>
+
+    <script src="/js/main.js" defer></script>
+
+</body>
+</html>

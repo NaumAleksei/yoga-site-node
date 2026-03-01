@@ -1,0 +1,623 @@
+/* Переменные и база */
+:root {
+    --primary-color: #566b58;
+    --bg-light: #f9fbf9;
+    --white: #ffffff;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+    margin: 0;
+    font-family: 'Segoe UI', Roboto, sans-serif;
+    color: #333;
+    background-color: var(--bg-light);
+    line-height: 1.6;
+}
+
+/* Общий контейнер - УБРАЛИ display: flex, чтобы он не ломал сетку */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+/* Шапка */
+header {
+    position: sticky; /* Вместо fixed */
+        top: 0;
+        z-index: 1000;    /* Чтобы шапка была поверх всего при скролле */
+        background-color: white; /* Обязательно задайте фон, иначе через шапку будет видно текст */
+    top: 0;
+    width: 100%;
+    background: rgba(255, 255, 255, 0.95);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 50px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    z-index: 1000;
+    box-sizing: border-box;
+}
+
+.logo { font-weight: bold; font-size: 1.5rem; letter-spacing: 1px; }
+.logo span { color: var(--primary-color); }
+
+header .logo img {
+    height: 50px;    /* Подберите нужную высоту под ваш хедер */
+    width: auto;     /* Чтобы пропорции не искажались */
+    display: block;
+}
+
+header .logo {
+    display: flex;
+    align-items: center;
+}
+
+nav a {
+    text-decoration: none;
+    color: #444;
+    margin: 0 15px;
+    font-weight: 500;
+    transition: 0.3s;
+}
+nav a:hover { color: var(--primary-color); }
+
+/* Главный экран (Слайдер) */
+.hero-slider {
+    position: relative;
+    width: 100%;
+    height: 85vh;
+    overflow: hidden;
+    margin-top: 60px;
+}
+
+.slide {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: white;
+    opacity: 0;
+    transition: opacity 1.5s ease-in-out;
+    z-index: 1;
+}
+
+.slide.active { opacity: 1; z-index: 2; }
+
+.hero-content h1 {
+    font-size: 3.5rem;
+    text-shadow: 2px 2px 10px rgba(0,0,0,0.5);
+    margin-bottom: 20px;
+}
+
+.cta-button {
+    display: inline-block;
+    padding: 15px 35px;
+    background-color: var(--primary-color);
+    color: white;
+    text-decoration: none;
+    border-radius: 50px;
+    font-weight: bold;
+    transition: 0.3s ease;
+}
+
+/* Блок "О методе" (Функциональная йога) */
+.yoga-description {
+    padding: 80px 0;
+    background-color: #fdfdfd;
+}
+
+.functional-box {
+    max-width: 1000px; /* Уменьшил с 1500 для лучшей читаемости */
+    margin: 0 auto;
+    padding: 40px;
+    background: #f4f6f4;
+    border-radius: 30px;
+}
+
+/* Блок "Обо мне" */
+.about-me-section {
+    padding: 100px 0;
+    background-color: #ffffff;
+}
+
+.about-grid {
+    display: grid;
+    grid-template-columns: 1.2fr 0.8fr;
+    gap: 60px;
+    align-items: center;
+}
+
+.image-wrapper { position: relative; }
+.image-wrapper img {
+    width: 100%;
+    border-radius: 20px;
+    position: relative;
+    z-index: 2;
+}
+
+.image-decoration {
+    position: absolute;
+    width: 100%; height: 100%;
+    border: 2px solid var(--primary-color);
+    top: 20px; left: 20px;
+    border-radius: 20px;
+    z-index: 1;
+}
+
+/* Блок "Что вас ждет" (Карточки) */
+.benefits-section {
+    padding: 80px 0;
+    background-color: #ffffff;
+}
+
+/* Обновленный вводный текст */
+.benefits-intro {
+    max-width: 900px;
+    margin: 0 auto 80px auto;
+    text-align: center;
+}
+
+.philosophy-text {
+    position: relative;
+    margin-bottom: 40px;
+}
+
+.quote-mark {
+    font-size: 8rem;
+    color: var(--primary-color);
+    opacity: 0.15;
+    position: absolute;
+    top: -60px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-family: serif;
+}
+
+.philosophy-text p {
+    font-size: 1.4rem;
+    line-height: 1.6;
+    color: #333;
+    font-weight: 300;
+}
+
+.sub-philosophy {
+    font-size: 1.1rem !important;
+    color: #666 !important;
+    margin-top: 15px;
+}
+
+.divider-line {
+    width: 60px;
+    height: 3px;
+    background: var(--primary-color);
+    margin: 30px auto;
+    border-radius: 2px;
+}
+
+.trainer-note {
+    font-size: 1.1rem;
+    color: #555;
+    max-width: 700px;
+    margin: 0 auto;
+    line-height: 1.8;
+}
+
+.trainer-note span {
+    color: var(--primary-color);
+    font-weight: 600;
+}
+
+/* РАВНОМЕРНАЯ СЕТКА */
+.benefits-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px; /* Немного уменьшили зазор, чтобы влезло по ширине */
+    align-items: stretch;
+}
+
+.card {
+    background: white;
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    /* УБРАЛИ жесткую min-height, теперь высота зависит от контента */
+    box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+    transition: transform 0.3s ease;
+    overflow: hidden;
+}
+
+.card-img-container {
+    /* Фиксируем высоту фото, чтобы все карточки были в один уровень */
+    height: 240px;
+    width: 100%;
+    overflow: hidden;
+}
+
+.card-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Важно: фото не растягивается, а обрезается под размер */
+}
+
+.card-content {
+    /* Уменьшили отступы, чтобы карточка не была огромной */
+    padding: 25px 20px;
+    flex-grow: 1;
+}
+
+.card-content h3 {
+    font-size: 1.4rem;
+    margin-bottom: 15px;
+    color: var(--primary-color);
+}
+
+.card-content ul li {
+    margin-bottom: 10px; /* Уплотнили список */
+    font-size: 0.95rem; /* Чуть меньше шрифт для компактности */
+    line-height: 1.4;
+}
+
+/* Блок "Зал" */
+.room-section {
+    padding: 100px 0;
+    background-color: #ffffff;
+}
+
+.room-grid {
+    display: grid;
+    grid-template-columns: 1.2fr 0.8fr;
+    gap: 60px;
+    align-items: center;
+}
+
+.image-wrapper { position: relative; }
+.image-wrapper img {
+    width: 100%;
+    border-radius: 20px;
+    position: relative;
+    z-index: 2;
+}
+
+.image-decoration {
+    position: absolute;
+    width: 100%; height: 100%;
+    border: 2px solid var(--primary-color);
+    top: 20px; left: 20px;
+    border-radius: 20px;
+    z-index: 1;
+}
+
+/* Финальная секция */
+.final-section {
+    padding: 100px 0;
+    background-color: #f4f6f4;
+}
+
+.footer-grid {
+    display: grid;
+    grid-template-columns: 1fr 1.2fr;
+    gap: 60px;
+    align-items: stretch; /* Растягиваем, чтобы блоки были одной высоты */
+}
+
+/* Стили формы - теперь она будет ровной */
+.contact-form-box {
+    background: white;
+    padding: 40px;
+    border-radius: 30px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+    display: flex;
+    flex-direction: column;
+}
+
+.yoga-form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px; /* Одинаковый отступ между всеми полями */
+    width: 100%;
+}
+
+.form-group {
+    width: 100%;
+}
+
+.yoga-form input {
+    width: 100%;
+    padding: 14px 18px;
+    border: 1px solid #eee;
+    border-radius: 12px;
+    font-size: 1rem;
+    background: #fdfdfd;
+    box-sizing: border-box; /* Чтобы padding не раздувал ширину */
+}
+
+.yoga-form .cta-button {
+    width: 100%;
+    border: none;
+    padding: 16px;
+    font-size: 1.1rem;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+/* Контакты - фиксим значки */
+.info-and-photo {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+    height: 100%;
+}
+
+.info-item {
+    display: flex;
+    align-items: center; /* Центрируем иконку и текст по одной линии */
+    gap: 12px; /* Расстояние от иконки до текста */
+    margin-bottom: 20px;
+}
+
+.info-item .icon {
+    font-size: 1.4rem;
+    line-height: 1;
+    min-width: 25px; /* Чтобы иконки стояли ровно друг под другом */
+}
+
+.info-item .text {
+    font-size: 1.1rem;
+    color: #444;
+}
+
+/* Фото */
+.footer-photo-wrapper {
+    flex-shrink: 0;
+}
+
+.footer-img {
+    width: 200px;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 6px solid white;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+}
+
+/* Секция цен в стиле формы записи */
+.prices-section {
+    padding: 100px 0;
+    background-color: #f4f6f4; /* Светло-зеленый фон всей секции, как у футера */
+}
+
+.price-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    margin-top: 50px;
+}
+
+.price-card {
+    /* Стиль в точности как у .contact-form-box */
+    background: white;
+    padding: 40px;
+    border-radius: 30px; /* Закругленные края как у формы */
+    box-shadow: 0 10px 30px rgba(0,0,0,0.05); /* Мягкая тень */
+    text-align: center;
+    transition: transform 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    border: none; /* Убираем рамку, работаем через тень */
+}
+
+.price-card:hover {
+    transform: translateY(-5px);
+}
+
+/* Выделение популярного абонемента */
+.price-card.featured {
+    position: relative;
+    /* Можно добавить легкий акцентный фон или оставить белым для чистоты */
+    background: #ffffff;
+    outline: 2px solid var(--primary-color); /* Вместо border для аккуратности */
+}
+
+.badge {
+    position: absolute;
+    top: -15px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--primary-color);
+    color: white;
+    padding: 6px 20px;
+    border-radius: 50px;
+    font-size: 0.85rem;
+    font-weight: 600;
+}
+
+.price-header h3 {
+    font-size: 1.6rem;
+    margin-bottom: 25px;
+    color: #333;
+    font-weight: 700;
+}
+
+.price-features {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 25px 0;
+    text-align: left;
+}
+
+.price-features li {
+    padding: 14px 0;
+    border-bottom: 1px solid #f0f0f0; /* Более мягкая линия */
+    display: flex;
+    justify-content: space-between;
+    font-size: 1rem;
+    color: #444;
+}
+
+.price-features li span {
+    font-weight: bold;
+    color: var(--primary-color);
+    white-space: nowrap;
+    margin-left: 10px;
+}
+
+.price-note {
+    font-size: 0.9rem;
+    color: #777;
+    margin-bottom: 35px;
+    flex-grow: 1;
+    line-height: 1.4;
+}
+
+.price-btn {
+    display: inline-block;
+    padding: 16px 30px;
+    background: #333;
+    color: white;
+    text-decoration: none;
+    border-radius: 12px; /* Углы кнопки как у полей ввода в форме */
+    font-weight: 600;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    border: none;
+}
+
+.price-card.featured .price-btn {
+    background: var(--primary-color);
+}
+
+.price-btn:hover {
+    background: #555;
+    transform: scale(1.02);
+}
+
+.price-card.featured .price-btn:hover {
+    filter: brightness(0.9);
+}
+
+.working-hours {
+    margin-top: 25px;
+    font-weight: 600;
+    color: var(--primary-color);
+}
+/* Стили для всплывающего окна */
+.modal-overlay {
+    display: none;
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: rgba(0,0,0,0.6);
+    z-index: 2000;
+    align-items: center;
+    justify-content: center;
+}
+
+.modal-content {
+    background: white;
+    padding: 40px;
+    border-radius: 20px;
+    text-align: center;
+    max-width: 400px;
+    position: relative;
+    animation: slideUp 0.3s ease;
+}
+
+.modal-icon {
+    font-size: 50px;
+    color: var(--primary-color);
+    margin-bottom: 15px;
+}
+
+.close-modal {
+    position: absolute;
+    top: 15px; right: 20px;
+    font-size: 25px;
+    cursor: pointer;
+}
+
+@keyframes slideUp {
+    from { transform: translateY(50px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}
+
+.final-zone {
+    padding: 100px 0;
+    background-color: #f4f6f4;
+}
+
+/* Сетка цен уже в ряд благодаря grid из прошлого шага */
+.price-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* Ровно 3 колонки */
+    gap: 20px;
+    margin-bottom: 80px;
+}
+
+/* Нижний ряд: форма и контакты */
+.action-row {
+    display: flex;
+    gap: 30px;
+    align-items: stretch; /* Чтобы блоки были одной высоты */
+}
+
+.contact-form-box, .contact-info-card {
+    flex: 1; /* Делят пространство 50/50 */
+    background: white;
+    padding: 40px;
+    border-radius: 30px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+}
+
+.contact-info-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.info-item {
+    margin-bottom: 20px;
+    font-size: 1.1rem;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+.mini-logo {
+    width: 120px;
+    height: 120px;
+    object-fit: cover;
+    border-radius: 50%;
+    margin: 30px auto 0 auto; /* Центрирует по горизонтали и дает отступ сверху */
+    display: block; /* Важно для работы margin: auto */
+    border: 3px solid #f4f6f4; /* Легкая рамка, чтобы лого не сливалось с фоном */
+}
+
+/* Адаптивность для мобилок */
+@media (max-width: 992px) {
+    .price-grid, .action-row {
+        flex-direction: column;
+        grid-template-columns: 1fr;
+        display: flex;
+    }
+}
+.site-footer {
+    padding: 30px 0;
+    background-color: #f4f6f4; /* Тот же фон, что и у final-zone, либо чуть темнее */
+    border-top: 1px solid #e0e0e0; /* Тонкая линия разделения */
+    text-align: center;
+}
+
+.site-footer p {
+    color: #888;
+    font-size: 0.9rem;
+    margin: 0;
+}
