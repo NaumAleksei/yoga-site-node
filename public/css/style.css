@@ -746,36 +746,77 @@ nav a:hover { color: var(--primary-color); }
 .menu-toggle {
     display: none;
 }
-.floating-tg {
-    position: fixed;
-    bottom: 30px;
-    right: 30px;
-    background-color: #0088cc;
-    color: white;
-    padding: 10px 20px;
-    border-radius: 50px;
+.contact-action {
+    display: flex;
+    justify-content: center;
+    margin: 30px 0;
+}
+
+.tg-button {
     display: flex;
     align-items: center;
+    background: linear-gradient(135deg, #0088cc 0%, #00a2ed 100%);
+    color: white !important;
     text-decoration: none;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-    z-index: 1000;
+    padding: 12px 28px;
+    border-radius: 50px;
+    font-weight: 600;
+    font-family: 'Segoe UI', Roboto, sans-serif;
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    box-shadow: 0 10px 20px rgba(0, 136, 204, 0.3);
+    position: relative;
+    overflow: hidden;
+}
+
+.tg-icon {
+    width: 24px;
+    height: 24px;
+    margin-right: 12px;
     transition: transform 0.3s ease;
 }
 
-.floating-tg:hover {
-    transform: scale(1.1);
-    background-color: #0077b5;
+.tg-button span {
+    font-size: 16px;
+    letter-spacing: 0.5px;
 }
 
-.floating-tg img {
-    width: 30px;
-    height: 30px;
-    margin-right: 10px;
+/* Эффект при наведении */
+.tg-button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 15px 25px rgba(0, 136, 204, 0.4);
+    background: linear-gradient(135deg, #0099e5 0%, #22b1f5 100%);
 }
 
-/* На мобилках оставляем только иконку, чтобы не мешала */
-@media (max-width: 600px) {
-    .floating-tg span { display: none; }
-    .floating-tg { padding: 15px; border-radius: 50%; }
-    .floating-tg img { margin-right: 0; }
+.tg-button:hover .tg-icon {
+    transform: rotate(-10deg) scale(1.1);
+}
+
+/* Легкий блик, проходящий по кнопке */
+.tg-button::after {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -60%;
+    width: 20%;
+    height: 200%;
+    background: rgba(255, 255, 255, 0.2);
+    transform: rotate(30deg);
+    transition: all 0.5s;
+    opacity: 0;
+}
+
+.tg-button:hover::after {
+    left: 120%;
+    opacity: 1;
+}
+
+/* Анимация пульсации, чтобы привлечь внимание */
+@keyframes tg-pulse {
+    0% { box-shadow: 0 0 0 0 rgba(0, 136, 204, 0.7); }
+    70% { box-shadow: 0 0 0 15px rgba(0, 136, 204, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(0, 136, 204, 0); }
+}
+
+.tg-button {
+    animation: tg-pulse 2s infinite;
 }
