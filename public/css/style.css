@@ -746,3 +746,36 @@ nav a:hover { color: var(--primary-color); }
 .menu-toggle {
     display: none;
 }
+.floating-tg {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    background-color: #0088cc;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 50px;
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    z-index: 1000;
+    transition: transform 0.3s ease;
+}
+
+.floating-tg:hover {
+    transform: scale(1.1);
+    background-color: #0077b5;
+}
+
+.floating-tg img {
+    width: 30px;
+    height: 30px;
+    margin-right: 10px;
+}
+
+/* На мобилках оставляем только иконку, чтобы не мешала */
+@media (max-width: 600px) {
+    .floating-tg span { display: none; }
+    .floating-tg { padding: 15px; border-radius: 50%; }
+    .floating-tg img { margin-right: 0; }
+}
