@@ -755,7 +755,7 @@ nav a:hover { color: var(--primary-color); }
 .tg-button {
     display: flex;
     align-items: center;
-    background: linear-gradient(135deg, #0088cc 0%, #00a2ed 100%);
+    background: #444;;
     color: white !important;
     text-decoration: none;
     padding: 12px 28px;
