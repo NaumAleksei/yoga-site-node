@@ -187,10 +187,16 @@ nav a:hover { color: var(--primary-color); }
 }
 
 /* --- 6. КАРТОЧКИ ПОЛЬЗЫ --- */
+.benefits-section {
+    padding: 60px 0;
+    background-color: var(--white);
+}
+
 .benefits-grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(3, 1fr); /* 3 колонки на десктопе */
     gap: 30px;
+    margin-top: 40px;
 }
 
 .card {
@@ -204,10 +210,12 @@ nav a:hover { color: var(--primary-color); }
     overflow: hidden;
 }
 
-.card:hover { transform: translateY(-5px); }
+.card:hover { 
+    transform: translateY(-5px); 
+}
 
 .card-img-container {
-    height: 240px;
+    aspect-ratio: 4 / 3; /* Фиксирует пропорции фото, чтобы они были одинаковыми */
     width: 100%;
     overflow: hidden;
 }
@@ -215,12 +223,35 @@ nav a:hover { color: var(--primary-color); }
 .card-img {
     width: 100%;
     height: 100%;
-    object-fit: cover;
+    object-fit: cover; /* Фото заполняет область без искажений */
 }
 
 .card-content {
-    padding: 25px 20px;
-    flex-grow: 1;
+    padding: 25px;
+    text-align: center;
+}
+
+.card-content h3 {
+    margin-top: 0;
+    color: var(--primary-color);
+    font-size: 1.3rem;
+}
+
+/* --- Адаптивность для карточек --- */
+@media (max-width: 992px) {
+    .benefits-grid {
+        grid-template-columns: repeat(2, 1fr); /* 2 колонки на планшетах */
+        gap: 20px;
+    }
+}
+
+@media (max-width: 600px) {
+    .benefits-grid {
+        grid-template-columns: 1fr; /* 1 колонка на мобильных */
+        max-width: 350px; /* Ограничиваем ширину, чтобы не растягивалось на весь экран */
+        margin-left: auto;
+        margin-right: auto;
+    }
 }
 
 /* --- 7. СЕКЦИЯ ЦЕН --- */
@@ -293,7 +324,7 @@ nav a:hover { color: var(--primary-color); }
 
 .price-features li:last-child { border-bottom: none; }
 
-/* Цвет кнопок в ценах */
+/* Кнопки в ценах */
 .price-card:not(.featured) .price-btn {
     background-color: #444;
 }
@@ -351,34 +382,7 @@ nav a:hover { color: var(--primary-color); }
     text-align: center;
 }
 
-/* --- 9. МОДАЛЬНОЕ ОКНО --- */
-.modal-overlay {
-    display: none;
-    position: fixed;
-    top: 0; left: 0;
-    width: 100%; height: 100%;
-    background: rgba(0,0,0,0.6);
-    z-index: 2000;
-    align-items: center;
-    justify-content: center;
-}
-
-.modal-content {
-    background: white;
-    padding: 40px;
-    border-radius: 20px;
-    text-align: center;
-    max-width: 400px;
-    position: relative;
-    animation: slideUp 0.3s ease;
-}
-
-@keyframes slideUp {
-    from { transform: translateY(50px); opacity: 0; }
-    to { transform: translateY(0); opacity: 1; }
-}
-
-/* --- СЕКЦИЯ ФИЛОСОФИИ --- */
+/* --- 9. СЕКЦИЯ ФИЛОСОФИИ --- */
 .philosophy-section {
     padding: 100px 0;
     background: linear-gradient(to bottom, var(--bg-light), #ffffff);
@@ -472,30 +476,46 @@ nav a:hover { color: var(--primary-color); }
     letter-spacing: 1px;
 }
 
-/* Адаптивность для блока */
-@media (max-width: 768px) {
-    .philosophy-card {
-        padding: 40px 20px;
-        margin: 0 15px;
-    }
-    .main-quote {
-        font-size: 1.4rem;
-    }
-    .quote-mark {
-        font-size: 5rem;
-        top: -30px;
-    }
+/* --- 10. МОДАЛЬНОЕ ОКНО --- */
+.modal-overlay {
+    display: none;
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: rgba(0,0,0,0.6);
+    z-index: 2000;
+    align-items: center;
+    justify-content: center;
 }
 
-/* --- 10. АДАПТИВНОСТЬ --- */
+.modal-content {
+    background: white;
+    padding: 40px;
+    border-radius: 20px;
+    text-align: center;
+    max-width: 400px;
+    position: relative;
+    animation: slideUp 0.3s ease;
+}
+
+@keyframes slideUp {
+    from { transform: translateY(50px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}
+
+/* --- 11. ОБЩАЯ АДАПТИВНОСТЬ (СГРУППИРОВАНО) --- */
 @media (max-width: 992px) {
-    .price-grid { grid-template-columns: 1fr; max-width: 450px; margin: 0 auto; }
+    .price-grid { 
+        grid-template-columns: 1fr; 
+        max-width: 450px; 
+        margin: 0 auto; 
+    }
 }
 
 @media (max-width: 768px) {
+    /* Навигация */
     header { padding: 10px 20px; }
     .menu-toggle { display: block; }
-    
     nav {
         display: none;
         position: absolute;
@@ -508,7 +528,23 @@ nav a:hover { color: var(--primary-color); }
     }
     nav.active { display: flex; }
     
+    /* Тексты и сетки */
     .hero-content h1 { font-size: 2.2rem; }
-    .about-grid, .room-grid, .benefits-grid, .action-row { grid-template-columns: 1fr; }
+    .about-grid, .room-grid, .benefits-grid, .action-row { 
+        grid-template-columns: 1fr; 
+    }
     .image-decoration { display: none; }
+
+    /* Блок философии */
+    .philosophy-card {
+        padding: 40px 20px;
+        margin: 0 15px;
+    }
+    .main-quote {
+        font-size: 1.4rem;
+    }
+    .quote-mark {
+        font-size: 5rem;
+        top: -30px;
+    }
 }
