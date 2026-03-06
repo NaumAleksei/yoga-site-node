@@ -375,3 +375,27 @@ nav a:hover { color: var(--primary-color); }
 
     .image-decoration { display: none; }
 }
+/* Универсальный стиль для всех кнопок (включая цены) */
+.price-btn, .cta-button, .tg-button {
+    display: inline-block;
+    padding: 15px 35px;
+    background-color: var(--primary-color) !important; /* Наш фирменный зеленый */
+    color: white !important;
+    text-decoration: none;
+    border-radius: 50px;
+    font-weight: bold;
+    border: none;
+    cursor: pointer;
+    transition: var(--transition);
+    text-align: center;
+}
+
+.price-btn:hover, .cta-button:hover, .tg-button:hover {
+    filter: brightness(1.1);
+    transform: translateY(-2px);
+}
+
+/* Если одна из кнопок в ценах должна быть темной (не активной) */
+.price-card:not(.featured) .price-btn {
+    background-color: #444 !important;
+}
