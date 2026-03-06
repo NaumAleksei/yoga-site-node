@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "description": "Сайт инструктора йоги Марины Наумовой",
   "scripts": {
-    "build": "echo 'Static build'"
+        "build": "mkdir -p public && cp index.html public/ && cp -r css js images public/ 2>/dev/null || true"
+  },
   },
   "dependencies": {
     "mongoose": "^8.2.0",
