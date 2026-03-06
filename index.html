@@ -17,7 +17,7 @@
 
 <header>
     <div class="logo">
-    <img src="/images/logo.png" alt="Инструктор йоги">
+    <img src="images/logo.png" alt="Инструктор йоги">
     </div>
 
     <div class="menu-toggle" id="mobile-menu">
@@ -88,7 +88,7 @@
 
                 <div class="image-block">
                     <div class="image-wrapper">
-                        <img src="/images/1myphoto new1.jpg" alt="Марина Наумова — инструктор йоги">
+                        <img src="images/1myphoto new1.jpg" alt="Марина Наумова — инструктор йоги">
                         <div class="image-decoration"></div>
                     </div>
                 </div>
@@ -140,7 +140,7 @@
             <div class="benefits-grid">
                 <div class="card">
                     <div class="photo-wrapper">
-                        <img src="/images/3block11.jpg" alt="Практика" class="card-img">
+                        <img src="images/3block11.jpg" alt="Практика" class="card-img">
                     </div>
                     <div class="card-content">
                         <h3>Практика</h3>
@@ -154,7 +154,7 @@
 
                 <div class="card">
                     <div class="photo-wrapper">
-                        <img src="/images/4new.jpg" alt="Дыхание" class="card-img">
+                        <img src="images/4new.jpg" alt="Дыхание" class="card-img">
                     </div>
                     <div class="card-content">
                         <h3>Дыхание</h3>
@@ -168,7 +168,7 @@
 
                 <div class="card">
                     <div class="photo-wrapper">
-                        <img src="/images/3block33.jpg" alt="Кому подходит" class="card-img">
+                        <img src="images/3block33.jpg" alt="Кому подходит" class="card-img">
                     </div>
                     <div class="card-content">
                         <h3>Кому подходит</h3>
@@ -199,7 +199,7 @@
 
                 <div class="image-block">
                     <div class="image-wrapper">
-                        <img src="/images/room.png" alt="Марина Наумова — инструктор йоги">
+                        <img src="images/room.png" alt="Марина Наумова — инструктор йоги">
                         <div class="image-decoration"></div>
                     </div>
                 </div>
@@ -276,41 +276,43 @@
         <span>Написать в Telegram</span>
     </a>
 </div>
-<img src="/images/contactlogo.png" alt="Марина" class="mini-logo">
+<img src="images/contactlogo.png" alt="Марина" class="mini-logo">
                 </div>
             </div>
         </div>
     </section>
 
-    <div id="successModal" class="modal-overlay">
-        <div class="modal-content">
-            <span class="close-modal">&times;</span>
-            <div class="modal-icon">✔</div>
-            <h2>Успешно!</h2>
-            <p>Вы записались на йогу. Марина свяжется с вами в ближайшее время.</p>
-            <button onclick="closeModal()" class="cta-button">Отлично</button>
-        </div>
+    <div class="contact-action">
+        <a href="https://t.me/Mari_naumova_art" class="tg-button" target="_blank">
+            <div class="tg-icon">
+                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M11.944 0C5.346 0 0 5.346 0 11.944c0 6.598 5.346 11.944 11.944 11.944 6.598 0 11.944-5.346 11.944-11.944C23.888 5.346 18.542 0 11.944 0zm5.206 8.19c-.176 1.912-.928 6.22-1.304 8.23-.158.854-.472 1.14-.776 1.17-.668.06-1.176-.444-1.826-.872-1.014-.672-1.588-1.088-2.572-1.734-1.136-.744-.4-.154.248.514.17.174 3.11 2.85 3.17 3.11.008.032.014.15-.06.214-.074.064-.182.042-.26.024-.112-.024-1.894-1.2-5.356-3.53-.508-.35-.968-.52-1.378-.51-.452.01-.1.222-1.32.62-.604.198-1.082.302-1.464.292-.404-.01-.784-.23-.694-.682.046-.236.42-.476 1.122-.72 4.364-1.896 7.276-3.146 8.734-3.75 4.158-1.724 5.02-2.022 5.584-2.032.124-.002.402.028.584.176.154.124.196.29.214.412.018.122.024.354 0 .502z" fill="white"/>
+                </svg>
+            </div>
+            <span>Написать в Telegram</span>
+        </a>
     </div>
+    <img src="images/contactlogo.png" alt="Марина" class="mini-logo">
+</section>
 
-        <div id="successModal" class="modal-overlay">
-        <div class="modal-content">
-            <span class="close-modal">&times;</span>
-            <div class="modal-icon">✔</div>
-            <h2>Успешно!</h2>
-            <p>Вы записались на йогу. Марина свяжется с вами в ближайшее время.</p>
-            <button onclick="closeModal()" class="cta-button">Отлично</button>
-        </div>
+<div id="successModal" class="modal-overlay">
+    <div class="modal-content">
+        <span class="close-modal" onclick="closeModal()">&times;</span>
+        <div class="modal-icon">✔</div>
+        <h2>Успешно!</h2>
+        <p>Вы записались на йогу. Марина свяжется с вами в ближайшее время.</p>
+        <button onclick="closeModal()" class="cta-button">Отлично</button>
     </div>
+</div>
 
-    <footer class="site-footer">
-        <div class="container">
-            <p>&copy; 2026 Наумовы Марина и Алексей. Все права защищены.</p>
-        </div>
-    </footer>
+<footer class="site-footer">
+    <div class="container">
+        <p>&copy; 2026 Наумовы Марина и Алексей. Все права защищены.</p>
+    </div>
+</footer>
 
-    <script src="/js/main.js" defer></script>
+<script src="js/main.js" defer></script>
 
-    <!-- Yandex.Metrika counter -->
 <script type="text/javascript">
     (function(m,e,t,r,i,k,a){
         m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
@@ -318,11 +320,9 @@
         for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
         k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)
     })(window, document,'script','https://mc.yandex.ru/metrika/tag.js?id=107097657', 'ym');
-
     ym(107097657, 'init', {ssr:true, webvisor:true, clickmap:true, ecommerce:"dataLayer", referrer: document.referrer, url: location.href, accurateTrackBounce:true, trackLinks:true});
 </script>
 <noscript><div><img src="https://mc.yandex.ru/watch/107097657" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
-<!-- /Yandex.Metrika counter -->
 
 </body>
 </html>
