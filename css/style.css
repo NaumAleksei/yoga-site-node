@@ -378,6 +378,115 @@ nav a:hover { color: var(--primary-color); }
     to { transform: translateY(0); opacity: 1; }
 }
 
+/* --- СЕКЦИЯ ФИЛОСОФИИ --- */
+.philosophy-section {
+    padding: 100px 0;
+    background: linear-gradient(to bottom, var(--bg-light), #ffffff);
+}
+
+.philosophy-card {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 60px;
+    background: white;
+    border-radius: 40px;
+    box-shadow: 0 15px 45px rgba(86, 107, 88, 0.08);
+    position: relative;
+    text-align: center;
+}
+
+.quote-container {
+    position: relative;
+    margin-bottom: 40px;
+}
+
+.quote-mark {
+    font-family: 'Georgia', serif;
+    font-size: 8rem;
+    color: var(--primary-color);
+    opacity: 0.15;
+    position: absolute;
+    top: -50px;
+    left: 50%;
+    transform: translateX(-50%);
+    line-height: 1;
+}
+
+.main-quote {
+    font-size: 1.8rem;
+    line-height: 1.4;
+    color: var(--text-dark);
+    margin-bottom: 25px;
+    position: relative;
+    z-index: 2;
+    font-style: italic;
+}
+
+.sub-text {
+    font-size: 1.1rem;
+    color: #666;
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+.divider-with-leaf {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 40px 0;
+}
+
+.divider-with-leaf::before,
+.divider-with-leaf::after {
+    content: "";
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(to right, transparent, #ddd, transparent);
+    max-width: 200px;
+}
+
+.leaf-icon {
+    margin: 0 20px;
+    font-size: 1.5rem;
+    opacity: 0.6;
+}
+
+.trainer-note-box {
+    background: var(--bg-light);
+    padding: 25px 40px;
+    border-radius: 20px;
+    border-left: 4px solid var(--primary-color);
+    display: inline-block;
+}
+
+.trainer-note-box p {
+    margin: 0;
+    font-size: 1rem;
+    color: #555;
+}
+
+.trainer-note-box .highlight {
+    color: var(--primary-color);
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* Адаптивность для блока */
+@media (max-width: 768px) {
+    .philosophy-card {
+        padding: 40px 20px;
+        margin: 0 15px;
+    }
+    .main-quote {
+        font-size: 1.4rem;
+    }
+    .quote-mark {
+        font-size: 5rem;
+        top: -30px;
+    }
+}
+
 /* --- 10. АДАПТИВНОСТЬ --- */
 @media (max-width: 992px) {
     .price-grid { grid-template-columns: 1fr; max-width: 450px; margin: 0 auto; }
