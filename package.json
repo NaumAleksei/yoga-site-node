@@ -2,9 +2,9 @@
   "name": "yoga-flow-site",
   "version": "1.0.0",
   "description": "Сайт инструктора йоги Марины Наумовой",
+  "main": "api/register.js",
   "scripts": {
-        "build": "mkdir -p public && cp index.html public/ && cp -r css js images public/ 2>/dev/null || true"
-  },
+    "build": "echo 'No build step required'"
   },
   "dependencies": {
     "mongoose": "^8.2.0",
@@ -12,6 +12,6 @@
     "resend": "^3.2.0"
   },
   "engines": {
-    "node": ">=18.0.0"
+    "node": "20.x"
   }
 }
