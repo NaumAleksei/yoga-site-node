@@ -187,7 +187,6 @@ nav a:hover { color: var(--primary-color); }
 }
 
 /* --- 6. КАРТОЧКИ ПОЛЬЗЫ --- */
-
 .benefits-section {
     padding: 80px 0;
     background-color: var(--white);
@@ -203,12 +202,13 @@ nav a:hover { color: var(--primary-color); }
     background: white;
     border-radius: 25px;
     display: flex;
-    flex-direction: column; /* Позволяет выравнивать элементы внутри сверху вниз */
+    flex-direction: column;
     height: 100%;
     box-shadow: 0 10px 30px rgba(0,0,0,0.05);
     transition: transform 0.3s ease;
     overflow: hidden;
-    text-align: center; /* Центрирует текст внутри по умолчанию */
+    /* Убираем общее центрирование текста */
+    text-align: left; 
 }
 
 .card:hover { 
@@ -216,7 +216,7 @@ nav a:hover { color: var(--primary-color); }
 }
 
 .card-img-container {
-    aspect-ratio: 16 / 10; /* Чуть более панорамный вид для фото */
+    aspect-ratio: 16 / 10;
     width: 100%;
     overflow: hidden;
 }
@@ -228,27 +228,29 @@ nav a:hover { color: var(--primary-color); }
 }
 
 .card-content {
-    padding: 30px 25px;
-    flex-grow: 1; /* Растягивает блок контента */
+    padding: 30px; /* Увеличили отступы для «воздуха» */
+    flex-grow: 1;
     display: flex;
     flex-direction: column;
-    justify-content: center; /* Центрирует текст по вертикали внутри блока */
-    align-items: center;    /* Центрирует текст по горизонтали */
+    justify-content: flex-start; /* Прижимаем контент к верху */
+    align-items: flex-start;    /* Выравниваем все элементы по левому краю */
 }
 
 .card-content h3 {
-    margin: 0 0 15px 0;
+    margin: 0 0 12px 0;
     color: var(--primary-color);
     font-size: 1.4rem;
     line-height: 1.2;
+    width: 100%; /* Гарантирует, что заголовок не будет прыгать */
 }
 
 .card-content p {
     margin: 0;
     font-size: 1rem;
     color: #666;
-    line-height: 1.5;
-    max-width: 280px; /* Чтобы текст не расплывался слишком широко */
+    line-height: 1.6;
+    /* Убираем ограничение ширины, чтобы текст заполнял карточку слева направо */
+    width: 100%; 
 }
 /* --- Адаптивность для карточек --- */
 @media (max-width: 992px) {
