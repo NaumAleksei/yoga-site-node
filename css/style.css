@@ -187,27 +187,28 @@ nav a:hover { color: var(--primary-color); }
 }
 
 /* --- 6. КАРТОЧКИ ПОЛЬЗЫ --- */
+
 .benefits-section {
-    padding: 60px 0;
+    padding: 80px 0;
     background-color: var(--white);
 }
 
 .benefits-grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr); /* 3 колонки на десктопе */
+    grid-template-columns: repeat(3, 1fr);
     gap: 30px;
-    margin-top: 40px;
 }
 
 .card {
     background: white;
-    border-radius: 20px;
+    border-radius: 25px;
     display: flex;
-    flex-direction: column;
+    flex-direction: column; /* Позволяет выравнивать элементы внутри сверху вниз */
     height: 100%;
     box-shadow: 0 10px 30px rgba(0,0,0,0.05);
     transition: transform 0.3s ease;
     overflow: hidden;
+    text-align: center; /* Центрирует текст внутри по умолчанию */
 }
 
 .card:hover { 
@@ -215,7 +216,7 @@ nav a:hover { color: var(--primary-color); }
 }
 
 .card-img-container {
-    aspect-ratio: 4 / 3; /* Фиксирует пропорции фото, чтобы они были одинаковыми */
+    aspect-ratio: 16 / 10; /* Чуть более панорамный вид для фото */
     width: 100%;
     overflow: hidden;
 }
@@ -223,20 +224,32 @@ nav a:hover { color: var(--primary-color); }
 .card-img {
     width: 100%;
     height: 100%;
-    object-fit: cover; /* Фото заполняет область без искажений */
+    object-fit: cover;
 }
 
 .card-content {
-    padding: 25px;
-    text-align: center;
+    padding: 30px 25px;
+    flex-grow: 1; /* Растягивает блок контента */
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Центрирует текст по вертикали внутри блока */
+    align-items: center;    /* Центрирует текст по горизонтали */
 }
 
 .card-content h3 {
-    margin-top: 0;
+    margin: 0 0 15px 0;
     color: var(--primary-color);
-    font-size: 1.3rem;
+    font-size: 1.4rem;
+    line-height: 1.2;
 }
 
+.card-content p {
+    margin: 0;
+    font-size: 1rem;
+    color: #666;
+    line-height: 1.5;
+    max-width: 280px; /* Чтобы текст не расплывался слишком широко */
+}
 /* --- Адаптивность для карточек --- */
 @media (max-width: 992px) {
     .benefits-grid {
