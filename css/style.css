@@ -1,4 +1,4 @@
-/* --- ПЕРЕМЕННЫЕ И БАЗА --- */
+/* --- 1. ПЕРЕМЕННЫЕ И БАЗА --- */
 :root {
     --primary-color: #566b58;
     --bg-light: #f9fbf9;
@@ -19,7 +19,6 @@ body {
     line-height: 1.6;
 }
 
-/* --- КОНТЕЙНЕР --- */
 .container {
     max-width: 1200px;
     margin: 0 auto;
@@ -28,7 +27,49 @@ body {
     box-sizing: border-box;
 }
 
-/* --- ШАПКА --- */
+/* --- 2. УНИВЕРСАЛЬНЫЕ КНОПКИ --- */
+.cta-button, .price-btn, .tg-button {
+    display: inline-block;
+    padding: 15px 35px;
+    background-color: var(--primary-color);
+    color: white !important;
+    text-decoration: none;
+    border-radius: 50px;
+    font-weight: bold;
+    border: none;
+    cursor: pointer;
+    transition: var(--transition);
+    text-align: center;
+    box-sizing: border-box;
+}
+
+.cta-button:hover, .price-btn:hover, .tg-button:hover {
+    filter: brightness(1.1);
+    transform: translateY(-2px);
+}
+
+/* Специфичный стиль для кнопки Telegram (пульсация) */
+.tg-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 15px rgba(86, 107, 88, 0.2);
+    animation: tg-pulse 2s infinite;
+}
+
+.tg-icon {
+    width: 20px;
+    height: 20px;
+    margin-right: 12px;
+}
+
+@keyframes tg-pulse {
+    0% { box-shadow: 0 0 0 0 rgba(86, 107, 88, 0.4); }
+    70% { box-shadow: 0 0 0 15px rgba(86, 107, 88, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(86, 107, 88, 0); }
+}
+
+/* --- 3. ШАПКА И НАВИГАЦИЯ --- */
 header {
     position: sticky;
     top: 0;
@@ -76,7 +117,7 @@ nav a:hover { color: var(--primary-color); }
     color: var(--text-dark);
 }
 
-/* --- ГЛАВНЫЙ ЭКРАН (СЛАЙДЕР) --- */
+/* --- 4. ГЛАВНЫЙ ЭКРАН (СЛАЙДЕР) --- */
 .hero-slider {
     position: relative;
     width: 100%;
@@ -108,24 +149,7 @@ nav a:hover { color: var(--primary-color); }
     margin-bottom: 20px;
 }
 
-.cta-button {
-    display: inline-block;
-    padding: 15px 35px;
-    background-color: var(--primary-color);
-    color: white;
-    text-decoration: none;
-    border-radius: 50px;
-    font-weight: bold;
-    transition: var(--transition);
-    border: none;
-}
-
-.cta-button:hover {
-    filter: brightness(1.1);
-    transform: translateY(-2px);
-}
-
-/* --- БЛОКИ КОНТЕНТА --- */
+/* --- 5. КОНТЕНТНЫЕ СЕКЦИИ --- */
 .yoga-description, .about-me-section, .benefits-section, .room-section, .prices-section, .final-zone {
     padding: 80px 0;
 }
@@ -162,7 +186,7 @@ nav a:hover { color: var(--primary-color); }
     z-index: 1;
 }
 
-/* --- КАРТОЧКИ ПОЛЬЗЫ --- */
+/* --- 6. КАРТОЧКИ ПОЛЬЗЫ --- */
 .benefits-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -199,23 +223,24 @@ nav a:hover { color: var(--primary-color); }
     flex-grow: 1;
 }
 
-/* --- ЦЕНЫ --- */
+/* --- 7. СЕКЦИЯ ЦЕН --- */
 .price-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 20px;
-    margin-bottom: 50px;
+    gap: 30px;
+    align-items: stretch;
 }
 
 .price-card {
     background: white;
-    padding: 40px;
+    padding: 40px 30px;
     border-radius: 30px;
     box-shadow: 0 10px 30px rgba(0,0,0,0.05);
-    text-align: center;
     transition: var(--transition);
     display: flex;
-    flex-direction: column;
+    flex-direction: column; 
+    align-items: center;
+    text-align: center;
 }
 
 .price-card.featured {
@@ -235,15 +260,59 @@ nav a:hover { color: var(--primary-color); }
     font-size: 0.85rem;
 }
 
-/* --- ФОРМА И КОНТАКТЫ --- */
-.action-row {
+.price-header h3 {
+    font-size: 1.6rem;
+    margin-bottom: 10px;
+}
+
+.price-header .amount {
+    font-size: 2rem;
+    font-weight: bold;
+    color: var(--primary-color);
+    margin-bottom: 25px;
+    display: block;
+}
+
+.price-features {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 30px 0;
+    width: 100%;
+    flex-grow: 1;
+}
+
+.price-features li {
+    padding: 12px 0;
+    border-bottom: 1px solid #f0f0f0;
+    color: #555;
+    font-size: 0.95rem;
     display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.price-features li:last-child { border-bottom: none; }
+
+/* Цвет кнопок в ценах */
+.price-card:not(.featured) .price-btn {
+    background-color: #444;
+}
+
+.price-btn {
+    width: 100%;
+    max-width: 250px;
+    margin-top: auto;
+}
+
+/* --- 8. ФОРМА И ФУТЕР --- */
+.action-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
     gap: 30px;
     align-items: stretch;
 }
 
 .contact-form-box, .contact-info-card {
-    flex: 1;
     background: white;
     padding: 40px;
     border-radius: 30px;
@@ -265,44 +334,6 @@ nav a:hover { color: var(--primary-color); }
     box-sizing: border-box;
 }
 
-/* --- КНОПКА TELEGRAM (В СТИЛЕ САЙТА) --- */
-.contact-action {
-    display: flex;
-    justify-content: center;
-    margin: 30px 0;
-}
-
-.tg-button {
-    display: flex;
-    align-items: center;
-    background-color: var(--primary-color);
-    color: white !important;
-    text-decoration: none;
-    padding: 15px 35px;
-    border-radius: 50px;
-    font-weight: bold;
-    transition: var(--transition);
-    box-shadow: 0 4px 15px rgba(86, 107, 88, 0.2);
-    animation: tg-pulse 2s infinite;
-}
-
-.tg-button:hover {
-    transform: translateY(-2px);
-    filter: brightness(1.1);
-}
-
-.tg-icon {
-    width: 20px;
-    height: 20px;
-    margin-right: 12px;
-}
-
-@keyframes tg-pulse {
-    0% { box-shadow: 0 0 0 0 rgba(86, 107, 88, 0.4); }
-    70% { box-shadow: 0 0 0 15px rgba(86, 107, 88, 0); }
-    100% { box-shadow: 0 0 0 0 rgba(86, 107, 88, 0); }
-}
-
 .mini-logo {
     width: 120px;
     height: 120px;
@@ -313,7 +344,14 @@ nav a:hover { color: var(--primary-color); }
     border: 3px solid #f4f6f4;
 }
 
-/* --- МОДАЛЬНОЕ ОКНО --- */
+.site-footer {
+    padding: 30px 0;
+    background-color: #f4f6f4;
+    border-top: 1px solid #e0e0e0;
+    text-align: center;
+}
+
+/* --- 9. МОДАЛЬНОЕ ОКНО --- */
 .modal-overlay {
     display: none;
     position: fixed;
@@ -340,18 +378,13 @@ nav a:hover { color: var(--primary-color); }
     to { transform: translateY(0); opacity: 1; }
 }
 
-/* --- ФУТЕР --- */
-.site-footer {
-    padding: 30px 0;
-    background-color: #f4f6f4;
-    border-top: 1px solid #e0e0e0;
-    text-align: center;
+/* --- 10. АДАПТИВНОСТЬ --- */
+@media (max-width: 992px) {
+    .price-grid { grid-template-columns: 1fr; max-width: 450px; margin: 0 auto; }
 }
 
-/* --- АДАПТИВНОСТЬ (МОБИЛКИ) --- */
 @media (max-width: 768px) {
     header { padding: 10px 20px; }
-    
     .menu-toggle { display: block; }
     
     nav {
@@ -364,38 +397,9 @@ nav a:hover { color: var(--primary-color); }
         padding: 20px 0;
         box-shadow: 0 5px 10px rgba(0,0,0,0.1);
     }
-
     nav.active { display: flex; }
-
+    
     .hero-content h1 { font-size: 2.2rem; }
-
-    .about-grid, .room-grid, .benefits-grid, .price-grid, .action-row {
-        grid-template-columns: 1fr;
-    }
-
+    .about-grid, .room-grid, .benefits-grid, .action-row { grid-template-columns: 1fr; }
     .image-decoration { display: none; }
-}
-/* Универсальный стиль для всех кнопок (включая цены) */
-.price-btn, .cta-button, .tg-button {
-    display: inline-block;
-    padding: 15px 35px;
-    background-color: var(--primary-color) !important; /* Наш фирменный зеленый */
-    color: white !important;
-    text-decoration: none;
-    border-radius: 50px;
-    font-weight: bold;
-    border: none;
-    cursor: pointer;
-    transition: var(--transition);
-    text-align: center;
-}
-
-.price-btn:hover, .cta-button:hover, .tg-button:hover {
-    filter: brightness(1.1);
-    transform: translateY(-2px);
-}
-
-/* Если одна из кнопок в ценах должна быть темной (не активной) */
-.price-card:not(.featured) .price-btn {
-    background-color: #444 !important;
 }
