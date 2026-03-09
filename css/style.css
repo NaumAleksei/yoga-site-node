@@ -151,7 +151,7 @@ nav a:hover { color: var(--primary-color); }
 
 /* --- 5. КОНТЕНТНЫЕ СЕКЦИИ --- */
 .yoga-description, .about-me-section, .benefits-section, .room-section, .prices-section, .final-zone {
-    padding: 80px 0;
+    padding: 40px 0;
 }
 
 .functional-box {
