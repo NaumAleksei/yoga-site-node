@@ -17,14 +17,13 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // === 2. КАРУСЕЛЬ ОТЗЫВОВ ===
+   // 1. Карусель
     const track = document.querySelector('.carousel-track');
+    const slides = Array.from(track ? track.children : []);
     const nextButton = document.querySelector('.next-btn');
     const prevButton = document.querySelector('.prev-btn');
-
-    // Проверяем, существуют ли элементы карусели на странице
-    if (track && nextButton && prevButton) {
-        const slides = Array.from(track.children);
+    
+    if (track && slides.length > 0) {
         let currentIndex = 0;
 
         const updateSlider = (index) => {
@@ -41,18 +40,9 @@ document.addEventListener('DOMContentLoaded', () => {
             updateSlider(currentIndex);
         });
 
-        // Автоматическая прокрутка каждые 5 секунд
-        let autoPlay = setInterval(() => {
-            nextButton.click();
-        }, 5000);
-
-        // Остановка автоплея при взаимодействии
-        const stopAutoPlay = () => clearInterval(autoPlay);
-        nextButton.addEventListener('mouseenter', stopAutoPlay);
-        prevButton.addEventListener('mouseenter', stopAutoPlay);
+        // Автопрокрутка
+        setInterval(() => nextButton.click(), 6000);
     }
-});
-
 // === 3. МОДАЛЬНОЕ ОКНО (Глобальные функции) ===
 function closeModal() {
     const modal = document.getElementById('successModal');
