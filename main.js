@@ -18,10 +18,10 @@ document.addEventListener('DOMContentLoaded', () => {
         setSlideWidth();
         window.addEventListener('resize', setSlideWidth);
 
-        const updateSlider = (index) => {
-            const width = slides[0].getBoundingClientRect().width;
-            track.style.transform = `translateX(-${index * width}px)`;
-        };
+     const updateSlider = (index) => {
+    // Двигаем трек влево на 100% * номер слайда
+    track.style.transform = `translateX(-${index * 100}%)`;
+};
 
         nextButton.addEventListener('click', () => {
             currentIndex = (currentIndex + 1) % slides.length;
