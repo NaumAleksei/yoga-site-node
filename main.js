@@ -49,43 +49,25 @@ document.addEventListener('DOMContentLoaded', () => {
     const guideForm = document.getElementById('popupGuideForm');
 
     if (popup && closeBtn) {
-        // Проверяем, видел ли пользователь окно ранее
-        let isPopupShown = localStorage.getItem('guideShown'); 
+        // Для тестов ставим false, чтобы видеть окно всегда. 
+        // Когда закончишь — замени на localStorage.getItem('guideShown')
+        let isPopupShown = false; 
 
         const showPopup = () => {
             if (!isPopupShown) {
                 popup.classList.add('show');
-                isPopupShown = true; // Помечаем как показанное в текущей сессии
+                isPopupShown = true; 
             }
         };
 
-        // Условия автоматического показа
-        setTimeout(showPopup, 5000); // Через 5 секунд после загрузки
-
+        setTimeout(showPopup, 5000);
         window.addEventListener('scroll', () => {
-            const scrolled = window.scrollY;
-            const threshold = document.documentElement.scrollHeight * 0.3; 
-            if (scrolled > threshold) showPopup();
+            if (window.scrollY > 400) showPopup();
         });
 
-        document.addEventListener('mouseleave', (e) => {
-            if (e.clientY < 0) showPopup();
-        });
+        closeBtn.onclick = () => popup.classList.remove('show');
+        window.onclick = (e) => { if (e.target === popup) popup.classList.remove('show'); };
 
-        // Закрытие окна
-        closeBtn.onclick = () => {
-            popup.classList.remove('show');
-            localStorage.setItem('guideShown', 'true');
-        };
-        
-        window.addEventListener('click', (e) => {
-            if (e.target === popup) {
-                popup.classList.remove('show');
-                localStorage.setItem('guideShown', 'true');
-            }
-        });
-
-        // Отправка в Telegram
         if (guideForm) {
             guideForm.onsubmit = function(e) {
                 e.preventDefault();
@@ -93,20 +75,22 @@ document.addEventListener('DOMContentLoaded', () => {
                 const token = "8333117641:AAHr9lfejJ5Stss5V0dWbBm9y7Bpy4gz3WE";
                 const chatId = "1730787950";
 
-                const name = this.userName ? this.userName.value : 'Не указано';
-                const phone = this.userPhone ? this.userPhone.value : 'Не указано';
-                
-                // Очистка номера для ссылки (оставляем только цифры)
+                const name = this.userName.value || 'Не указано';
+                const phone = this.userPhone.value || 'Не указано';
                 const cleanPhone = phone.replace(/\D/g, '');
+                const time = new Date().toLocaleTimeString(); // Чтобы видеть, что код обновился
 
-                // Красивый текст сообщения с Markdown
-                const message = `🚀 *Новая заявка на ГАЙД!*\n\n👤 *Имя:* ${name}\n📞 *Телефон:* ${phone}`;
+                // Сообщение с Markdown форматированием
+                const message = `🔥 *НОВАЯ ЗАЯВКА (в ${time})*\n\n👤 *Имя:* ${name}\n📞 *Телефон:* ${phone}`;
 
-                // Кнопка для быстрой связи в Telegram (через поиск по номеру)
+                // Кнопки: Telegram + WhatsApp (на выбор)
                 const keyboard = {
-                    inline_keyboard: [[
-                        { text: "✉️ Написать в Telegram", url: `https://t.me/${cleanPhone.startsWith('7') ? '+' + cleanPhone : cleanPhone}` }
-                    ]]
+                    inline_keyboard: [
+                        [
+                            { text: "✉️ Написать в TG", url: `https://t.me/+${cleanPhone.startsWith('7') ? cleanPhone : '7' + cleanPhone}` },
+                            { text: "💬 В WhatsApp", url: `https://wa.me/${cleanPhone}` }
+                        ]
+                    ]
                 };
 
                 const url = `https://api.telegram.org/bot${token}/sendMessage?chat_id=${chatId}&text=${encodeURIComponent(message)}&parse_mode=Markdown&reply_markup=${encodeURIComponent(JSON.stringify(keyboard))}`;
@@ -114,17 +98,14 @@ document.addEventListener('DOMContentLoaded', () => {
                 fetch(url)
                 .then(response => {
                     if (response.ok) {
-                        alert('Спасибо! Ваш гайд открывается в новой вкладке.');
+                        alert('Спасибо! Ваш гайд открывается.');
                         window.open('https://yoga34.ru/guide.pdf', '_blank'); 
                         popup.classList.remove('show');
-                        localStorage.setItem('guideShown', 'true');
                     } else {
-                        alert('Ошибка отправки. Проверьте бота.');
+                        alert('Ошибка бота. Проверьте консоль.');
                     }
                 })
-                .catch(err => {
-                    console.error('Ошибка:', err);
-                });
+                .catch(err => console.error('Ошибка:', err));
             };
         }
     }
@@ -132,10 +113,7 @@ document.addEventListener('DOMContentLoaded', () => {
     /* --- 3. БУРГЕР-МЕНЮ --- */
     const menuToggle = document.querySelector('.menu-toggle');
     const navLinks = document.querySelector('.nav-links'); 
-    
     if (menuToggle && navLinks) {
-        menuToggle.onclick = () => {
-            navLinks.classList.toggle('active');
-        };
+        menuToggle.onclick = () => navLinks.classList.toggle('active');
     }
 });
