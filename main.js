@@ -7,36 +7,44 @@ document.addEventListener('DOMContentLoaded', () => {
     if (track && nextButton && prevButton && slides.length > 0) {
         let currentIndex = 0;
 
-        const moveSlide = (index) => {
-            track.style.transform = `translateX(-${index * 100}%)`;
+        // Принудительно задаем ширину слайдам, чтобы текст не тянулся
+        const setSlideWidth = () => {
+            const width = track.parentElement.getBoundingClientRect().width;
+            slides.forEach(slide => {
+                slide.style.width = width + 'px';
+            });
+        };
+        
+        setSlideWidth();
+        window.addEventListener('resize', setSlideWidth);
+
+        const updateSlider = (index) => {
+            const width = slides[0].getBoundingClientRect().width;
+            track.style.transform = `translateX(-${index * width}px)`;
         };
 
         nextButton.addEventListener('click', () => {
             currentIndex = (currentIndex + 1) % slides.length;
-            moveSlide(currentIndex);
-            console.log('Клик вперед, индекс:', currentIndex);
+            updateSlider(currentIndex);
         });
 
         prevButton.addEventListener('click', () => {
             currentIndex = (currentIndex - 1 + slides.length) % slides.length;
-            moveSlide(currentIndex);
-            console.log('Клик назад, индекс:', currentIndex);
+            updateSlider(currentIndex);
         });
 
-        // Автоплей
-        setInterval(() => {
-            nextButton.click();
-        }, 5000);
+        // Автопрокрутка
+        setInterval(() => nextButton.click(), 5000);
+        
+        console.log("Карусель готова, слайдов:", slides.length);
     } else {
-        console.error("Карусель не найдена! Проверь классы в HTML.");
+        console.log("Элементы карусели не найдены. Проверь классы в HTML.");
     }
 
-    // Бургер (если есть)
+    // Логика бургер-меню (если нужно)
     const menuToggle = document.querySelector('.menu-toggle');
     const nav = document.querySelector('.nav-links');
     if (menuToggle && nav) {
-        menuToggle.onclick = () => {
-            nav.classList.toggle('active');
-        };
+        menuToggle.onclick = () => nav.classList.toggle('active');
     }
 });
