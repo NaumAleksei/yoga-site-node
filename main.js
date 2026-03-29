@@ -1,54 +1,42 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // 1. Бургер-меню
-    const menuToggle = document.querySelector('.menu-toggle');
-    const nav = document.querySelector('.nav-links');
-
-    if (menuToggle && nav) {
-        menuToggle.addEventListener('click', () => {
-            nav.classList.toggle('active');
-            menuToggle.innerHTML = nav.classList.contains('active') ? '&times;' : '&#9776;';
-        });
-    }
-
-    // 2. Карусель (Логика)
     const track = document.querySelector('.carousel-track');
     const nextButton = document.querySelector('.next-btn');
     const prevButton = document.querySelector('.prev-btn');
-    
-    if (track && nextButton && prevButton) {
-        const slides = Array.from(track.children);
+    const slides = Array.from(track ? track.children : []);
+
+    if (track && nextButton && prevButton && slides.length > 0) {
         let currentIndex = 0;
 
-        const updateSlider = (index) => {
+        const moveSlide = (index) => {
             track.style.transform = `translateX(-${index * 100}%)`;
         };
 
         nextButton.addEventListener('click', () => {
-            currentIndex++;
-            if (currentIndex >= slides.length) currentIndex = 0;
-            updateSlider(currentIndex);
+            currentIndex = (currentIndex + 1) % slides.length;
+            moveSlide(currentIndex);
+            console.log('Клик вперед, индекс:', currentIndex);
         });
 
         prevButton.addEventListener('click', () => {
-            currentIndex--;
-            if (currentIndex < 0) currentIndex = slides.length - 1;
-            updateSlider(currentIndex);
+            currentIndex = (currentIndex - 1 + slides.length) % slides.length;
+            moveSlide(currentIndex);
+            console.log('Клик назад, индекс:', currentIndex);
         });
 
-        // Автопрокрутка
+        // Автоплей
         setInterval(() => {
             nextButton.click();
         }, 5000);
+    } else {
+        console.error("Карусель не найдена! Проверь классы в HTML.");
+    }
+
+    // Бургер (если есть)
+    const menuToggle = document.querySelector('.menu-toggle');
+    const nav = document.querySelector('.nav-links');
+    if (menuToggle && nav) {
+        menuToggle.onclick = () => {
+            nav.classList.toggle('active');
+        };
     }
 });
-
-// Глобальные функции для модалки (вне DOMContentLoaded)
-function openModal() {
-    const modal = document.getElementById('successModal');
-    if (modal) modal.style.display = 'flex';
-}
-
-function closeModal() {
-    const modal = document.getElementById('successModal');
-    if (modal) modal.style.display = 'none';
-}

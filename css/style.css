@@ -566,71 +566,67 @@ nav a:hover { color: var(--primary-color); }
 .reviews-section {
     padding: 60px 0;
     background-color: #f9f7f4;
-    overflow: hidden; /* Важно: скрываем то, что вылезло */
+    text-align: center;
 }
 
 .carousel-container {
     position: relative;
-    max-width: 800px;
+    max-width: 900px;
     margin: 0 auto;
-    padding: 0 50px; /* Место для кнопок */
+    display: flex; /* Выравниваем кнопки и окно в ряд */
+    align-items: center;
+    justify-content: center;
 }
 
 .carousel-wrapper {
-    overflow: hidden; /* Окно, в которое мы смотрим */
+    overflow: hidden; /* Это наше "окно" */
     width: 100%;
+    max-width: 700px; /* Ширина одного отзыва */
+    margin: 0 15px;
     border-radius: 15px;
     background: #fff;
-    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.08);
 }
 
 .carousel-track {
-    display: flex; /* Выстраиваем в ряд */
-    transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-    will-change: transform;
-    width: 100%; 
+    display: flex; /* Ставим слайды в горизонтальную шеренгу */
+    transition: transform 0.5s ease-in-out;
+    width: 100%;
 }
 
 .review-card {
-    min-width: 100%; /* Каждый отзыв занимает все "окно" */
-    flex-shrink: 0;   /* ЗАПРЕЩАЕМ сжиматься в одну линию */
-    padding: 40px;
+    /* flex: grow | shrink | basis */
+    flex: 0 0 100%; /* ЗАПРЕЩАЕТ сжиматься и фиксирует ширину на 100% от wrapper */
+    width: 100%;
+    padding: 50px 40px;
     box-sizing: border-box;
-    text-align: center;
 }
 
 .review-text {
     font-style: italic;
-    font-size: 1.1rem;
+    font-size: 1.15rem;
     line-height: 1.6;
-    color: #555;
-    margin-bottom: 20px;
-    max-width: 600px;
-    margin-left: auto;
-    margin-right: auto;
+    color: #444;
+    margin-bottom: 25px;
+    word-wrap: break-word; /* Чтобы текст не вылезал */
 }
 
 .review-author {
-    font-weight: bold;
     color: #c7a17a;
+    font-weight: 700;
 }
 
-/* Кнопки */
 .carousel-btn {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
     background: #c7a17a;
     color: white;
     border: none;
-    width: 40px;
-    height: 40px;
+    width: 45px;
+    height: 45px;
     border-radius: 50%;
     cursor: pointer;
-    z-index: 10;
+    font-size: 1.2rem;
+    flex-shrink: 0; /* Чтобы кнопка не сплющилась */
+    transition: 0.3s;
 }
-
-.prev-btn { left: 0; }
-.next-btn { right: 0; }
 
 .carousel-btn:hover { background: #b08d68; }
