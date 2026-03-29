@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
-    /* --- 1. КАРУСЕЛЬ --- */
+    /* --- 1. КАРУСЕЛЬ ОТЗЫВОВ --- */
     const track = document.querySelector('.carousel-track');
     const nextButton = document.querySelector('.next-btn');
     const prevButton = document.querySelector('.prev-btn');
@@ -29,7 +29,7 @@ document.addEventListener('DOMContentLoaded', () => {
         };
 
         nextButton.addEventListener('click', (e) => {
-            e.stopPropagation(); // Чтобы клик не "проваливался"
+            e.stopPropagation();
             showNextSlide();
             resetAutoPlay();
         });
@@ -49,7 +49,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const guideForm = document.getElementById('popupGuideForm');
 
     if (popup && closeBtn) {
-        // Пока тестируем, shown всегда false. Потом вернешь localStorage.
         let shown = false; 
 
         const showPopup = () => {
@@ -59,17 +58,15 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         };
 
-        // Показ через 5 сек
+        // Условия показа
         setTimeout(showPopup, 5000);
 
-        // Показ при скролле 30%
         window.addEventListener('scroll', () => {
             const scrolled = window.scrollY;
             const threshold = document.documentElement.scrollHeight * 0.3; 
             if (scrolled > threshold) showPopup();
         });
 
-        // Показ при уходе с вкладки
         document.addEventListener('mouseleave', (e) => {
             if (e.clientY < 0) showPopup();
         });
@@ -88,26 +85,37 @@ document.addEventListener('DOMContentLoaded', () => {
                 const token = "8333117641:AAHr9lfejJ5Stss5V0dWbBm9y7Bpy4gz3WE";
                 const chatId = "1730787950";
 
-                const name = this.userName.value;
-                const phone = this.userPhone.value;
+                // Проверяем наличие полей, чтобы не было ошибок
+                const nameField = this.querySelector('[name="userName"]');
+                const phoneField = this.querySelector('[name="userPhone"]');
+                
+                const name = nameField ? nameField.value : 'Имя не указано';
+                const phone = phoneField ? phoneField.value : 'Телефон не указан';
                 const message = `🚀 Новая заявка на ГАЙД!\n👤 Имя: ${name}\n📞 Телефон: ${phone}`;
 
                 const url = `https://api.telegram.org/bot${token}/sendMessage?chat_id=${chatId}&text=${encodeURIComponent(message)}`;
 
                 fetch(url)
-                    .then(response => {
-                        if (response.ok) {
-                            alert('Спасибо! Ваш гайд открывается в новой вкладке.');
-                            window.open('https://yoga34.ru/guide.pdf', '_blank'); 
-                            popup.classList.remove('show');
-                            localStorage.setItem('guideShown', 'true');
-                        } else {
-                            alert('Ошибка отправки в Telegram. Проверьте настройки бота.');
-                        }
-                    })
-                    .catch(err => console.error('Ошибка сети:', err));
+                .then(response => {
+                    if (response.ok) {
+                        alert('Спасибо! Ваш гайд открывается в новой вкладке.');
+                        window.open('https://yoga34.ru/guide.pdf', '_blank'); 
+                        popup.classList.remove('show');
+                        localStorage.setItem('guideShown', 'true');
+                    } else {
+                        alert('Ошибка отправки. Проверьте настройки бота.');
+                    }
+                })
+                .catch(err => console.error('Ошибка:', err));
             };
-        }
-    }
+        } // Конец блока guideForm
+    } // Конец блока popup
 
     /* --- 3. БУРГЕР-МЕНЮ --- */
+    const menuToggle = document.querySelector('.menu-toggle');
+    const nav = document.querySelector('.nav-links'); 
+    if (menuToggle && nav) {
+        menuToggle.onclick = () => nav.classList.toggle('active');
+    }
+
+}); // ФИНАЛЬНАЯ СКОБКА (обязательна!)
