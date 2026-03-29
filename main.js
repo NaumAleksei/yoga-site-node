@@ -69,24 +69,32 @@ document.addEventListener('DOMContentLoaded', () => {
 
         if (guideForm) {
             guideForm.onsubmit = function(e) {
-                e.preventDefault();
+    e.preventDefault();
 
-                const token = "8333117641:AAHr9lfejJ5Stss5V0dWbBm9y7Bpy4gz3WE";
-                const chatId = "1730787950";
+    const name = this.userName.value || 'Не указано';
+    const phone = this.userPhone.value || 'Не указано';
+    const time = new Date().toLocaleTimeString();
 
-                const name = this.userName.value || 'Не указано';
-                const phone = this.userPhone.value || 'Не указано';
-                const cleanPhone = phone.replace(/\D/g, '');
-                const time = new Date().toLocaleTimeString();
-
-                const message = `🔥 *НОВАЯ ЗАЯВКА (в ${time})*\n\n👤 *Имя:* ${name}\n📞 *Телефон:* ${phone}`;
-
-                const keyboard = {
-                    inline_keyboard: [[
-                        { text: "✉️ Написать в TG", url: `https://t.me/+${cleanPhone.startsWith('7') ? cleanPhone : '7' + cleanPhone}` },
-                        { text: "💬 В WhatsApp", url: `https://wa.me/${cleanPhone}` }
-                    ]]
-                };
+    // Отправляем данные не в Телеграм напрямую, а на наш сервер в Vercel
+    fetch('/api/send-telegram', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name, phone, time })
+    })
+    .then(response => {
+        if (response.ok) {
+            localStorage.setItem('guideShown', 'true');
+            alert('Спасибо! Сейчас откроется ваш гайд.');
+            window.location.assign('https://yoga34.ru/guide.pdf');
+        } else {
+            alert('Ошибка отправки. Попробуйте позже.');
+        }
+    })
+    .catch(err => {
+        console.error('Ошибка:', err);
+        window.location.assign('https://yoga34.ru/guide.pdf');
+    });
+};
 
                 const url = `https://api.telegram.org/bot${token}/sendMessage?chat_id=${chatId}&text=${encodeURIComponent(message)}&parse_mode=Markdown&reply_markup=${encodeURIComponent(JSON.stringify(keyboard))}`;
 
