@@ -686,25 +686,53 @@ nav a:hover { color: var(--primary-color); }
     transform: translateY(-50%) scale(1.1) !important;
 }
 
-/* --- АДАПТИВ ПОД МОБИЛКИ --- */
+/* --- ФИНАЛЬНЫЕ ПРАВКИ МОБИЛЬНОЙ КАРУСЕЛИ --- */
 @media (max-width: 768px) {
+    /* 1. Убираем внешние отступы, чтобы блок не сжимался */
+    .carousel-wrapper {
+        margin: 0 !important; 
+        width: 100% !important;
+        max-width: 100% !important;
+        flex: 1 1 auto !important;
+    }
+
+    /* 2. Даем контейнеру небольшой внутренний отступ для кнопок */
     .carousel-container {
-        padding: 0 40px !important; /* Даем место кнопкам внутри */
+        padding: 0 45px !important; /* Место под кнопки 36px + зазор */
+        box-sizing: border-box !important;
     }
 
+    /* 3. Фиксируем кнопки, чтобы не уезжали */
     .carousel-btn {
-        width: 36px !important;
-        height: 36px !important;
-        /* На мобилках прижимаем кнопки к краям, чтобы не перекрывали текст */
-        margin-top: 0 !important; 
+        position: absolute !important;
+        top: 50% !important;
+        transform: translateY(-50%) !important;
+        margin: 0 !important;
     }
 
+    /* 4. Прижимаем их плотно к краям контейнера */
     .prev-btn { left: 5px !important; }
     .next-btn { right: 5px !important; }
 
-    /* Убираем эффекты при нажатии, чтобы не дергалось */
-    .carousel-btn:hover, .carousel-btn:active {
-        transform: translateY(-50%) !important; 
+    /* 5. Уменьшаем отступы внутри карточки отзыва, чтобы влезло на экран */
+    .review-card {
+        padding: 30px 15px !important;
+    }
+
+    .review-text {
+        font-size: 1rem !important; /* Чуть меньше текст для мобилок */
+        margin-bottom: 15px !important;
+    }
+}
+
+/* Фикс для очень маленьких экранов (iPhone SE и т.д.) */
+@media (max-width: 380px) {
+    .carousel-container {
+        padding: 0 40px !important;
+    }
+    .carousel-btn {
+        width: 32px !important;
+        height: 32px !important;
     }
 }
 .guide-overlay {
