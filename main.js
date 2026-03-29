@@ -49,18 +49,18 @@ document.addEventListener('DOMContentLoaded', () => {
     const guideForm = document.getElementById('popupGuideForm');
 
     if (popup && closeBtn) {
-        // Пока тестируем, ставим false. Когда всё заработает — вернем localStorage
-        let shown = false; 
+        // Проверяем, видел ли пользователь окно ранее
+        let isPopupShown = localStorage.getItem('guideShown'); 
 
         const showPopup = () => {
-            if (!shown) {
+            if (!isPopupShown) {
                 popup.classList.add('show');
-                shown = true; 
+                isPopupShown = true; // Помечаем как показанное в текущей сессии
             }
         };
 
         // Условия автоматического показа
-        setTimeout(showPopup, 5000); // Через 5 секунд
+        setTimeout(showPopup, 5000); // Через 5 секунд после загрузки
 
         window.addEventListener('scroll', () => {
             const scrolled = window.scrollY;
@@ -73,10 +73,16 @@ document.addEventListener('DOMContentLoaded', () => {
         });
 
         // Закрытие окна
-        closeBtn.onclick = () => popup.classList.remove('show');
+        closeBtn.onclick = () => {
+            popup.classList.remove('show');
+            localStorage.setItem('guideShown', 'true');
+        };
         
         window.addEventListener('click', (e) => {
-            if (e.target === popup) popup.classList.remove('show');
+            if (e.target === popup) {
+                popup.classList.remove('show');
+                localStorage.setItem('guideShown', 'true');
+            }
         });
 
         // Отправка в Telegram
@@ -89,9 +95,21 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 const name = this.userName ? this.userName.value : 'Не указано';
                 const phone = this.userPhone ? this.userPhone.value : 'Не указано';
-                const message = `🚀 Новая заявка на ГАЙД!\n👤 Имя: ${name}\n📞 Телефон: ${phone}`;
+                
+                // Очистка номера для ссылки (оставляем только цифры)
+                const cleanPhone = phone.replace(/\D/g, '');
 
-                const url = `https://api.telegram.org/bot${token}/sendMessage?chat_id=${chatId}&text=${encodeURIComponent(message)}`;
+                // Красивый текст сообщения с Markdown
+                const message = `🚀 *Новая заявка на ГАЙД!*\n\n👤 *Имя:* ${name}\n📞 *Телефон:* ${phone}`;
+
+                // Кнопка для быстрой связи в Telegram (через поиск по номеру)
+                const keyboard = {
+                    inline_keyboard: [[
+                        { text: "✉️ Написать в Telegram", url: `https://t.me/${cleanPhone.startsWith('7') ? '+' + cleanPhone : cleanPhone}` }
+                    ]]
+                };
+
+                const url = `https://api.telegram.org/bot${token}/sendMessage?chat_id=${chatId}&text=${encodeURIComponent(message)}&parse_mode=Markdown&reply_markup=${encodeURIComponent(JSON.stringify(keyboard))}`;
 
                 fetch(url)
                 .then(response => {
@@ -101,12 +119,11 @@ document.addEventListener('DOMContentLoaded', () => {
                         popup.classList.remove('show');
                         localStorage.setItem('guideShown', 'true');
                     } else {
-                        alert('Ошибка отправки. Проверьте, запущен ли бот (/start).');
+                        alert('Ошибка отправки. Проверьте бота.');
                     }
                 })
                 .catch(err => {
                     console.error('Ошибка:', err);
-                    alert('Произошла ошибка при связи с сервером.');
                 });
             };
         }
