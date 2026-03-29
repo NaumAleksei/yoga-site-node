@@ -28,12 +28,14 @@ document.addEventListener('DOMContentLoaded', () => {
             autoPlayTimer = setInterval(showNextSlide, 5000);
         };
 
-        nextButton.addEventListener('click', () => {
+        nextButton.addEventListener('click', (e) => {
+            e.stopPropagation(); // Чтобы клик не "проваливался"
             showNextSlide();
             resetAutoPlay();
         });
 
-        prevButton.addEventListener('click', () => {
+        prevButton.addEventListener('click', (e) => {
+            e.stopPropagation();
             showPrevSlide();
             resetAutoPlay();
         });
@@ -41,87 +43,71 @@ document.addEventListener('DOMContentLoaded', () => {
         resetAutoPlay();
     }
 
-   /* --- 2. ПОПАП (Улучшенная версия) --- */
-const popup = document.getElementById('guidePopup');
-const closeBtn = document.getElementById('closePopupBtn');
-const guideForm = document.getElementById('popupGuideForm');
+    /* --- 2. ПОПАП ГАЙДА --- */
+    const popup = document.getElementById('guidePopup');
+    const closeBtn = document.getElementById('closePopupBtn');
+    const guideForm = document.getElementById('popupGuideForm');
 
-if (popup && closeBtn) {
-    // ВАЖНО: Пока тестируешь, закомментируй строку с localStorage ниже, 
-    // чтобы окно всплывало КАЖДЫЙ раз при обновлении.
-    // let shown = localStorage.getItem('guideShown'); 
-    let shown = false; // Для тестов ставим false
+    if (popup && closeBtn) {
+        // Пока тестируем, shown всегда false. Потом вернешь localStorage.
+        let shown = false; 
 
-    const showPopup = () => {
-        if (!shown) {
-            popup.classList.add('show');
-            // localStorage.setItem('guideShown', 'true'); // Включишь, когда всё доделаем
-            shown = true; 
-        }
-    };
+        const showPopup = () => {
+            if (!shown) {
+                popup.classList.add('show');
+                shown = true; 
+            }
+        };
 
-    // А) Показать через 5 секунд после загрузки
-    setTimeout(showPopup, 5000);
+        // Показ через 5 сек
+        setTimeout(showPopup, 5000);
 
-    // Б) Показать при скролле (если пролистали 30% страницы)
-    window.addEventListener('scroll', () => {
-        const scrolled = window.scrollY;
-        const threshold = document.documentElement.scrollHeight * 0.3; 
-        if (scrolled > threshold) {
-            showPopup();
-        }
-    });
+        // Показ при скролле 30%
+        window.addEventListener('scroll', () => {
+            const scrolled = window.scrollY;
+            const threshold = document.documentElement.scrollHeight * 0.3; 
+            if (scrolled > threshold) showPopup();
+        });
 
-    // В) Показать, если мышка уходит вверх (попытка закрыть вкладку)
-    document.addEventListener('mouseleave', (e) => {
-        if (e.clientY < 0) showPopup();
-    });
+        // Показ при уходе с вкладки
+        document.addEventListener('mouseleave', (e) => {
+            if (e.clientY < 0) showPopup();
+        });
 
-    // Закрытие
-    closeBtn.onclick = () => popup.classList.remove('show');
-    window.addEventListener('click', (e) => {
-        if (e.target === popup) popup.classList.remove('show');
-    });
+        // Закрытие
+        closeBtn.onclick = () => popup.classList.remove('show');
+        window.addEventListener('click', (e) => {
+            if (e.target === popup) popup.classList.remove('show');
+        });
 
-    // Отправка в Telegram
-    if (guideForm) {
+        // Отправка в Telegram
         if (guideForm) {
-    guideForm.onsubmit = function(e) {
-        e.preventDefault();
+            guideForm.onsubmit = function(e) {
+                e.preventDefault();
 
-        // --- НАСТРОЙКИ (Вставь свои данные) ---
-        const token = "8333117641:AAHr9lfejJ5Stss5V0dWbBm9y7Bpy4gz3WE";
-        const chatId = "1730787950";
-        // ---------------------------------------
+                const token = "8333117641:AAHr9lfejJ5Stss5V0dWbBm9y7Bpy4gz3WE";
+                const chatId = "1730787950";
 
-        const name = this.userName.value;
-        const phone = this.userPhone.value;
-        const message = `🚀 Новая заявка на ГАЙД!\n👤 Имя: ${name}\n📞 Телефон: ${phone}`;
+                const name = this.userName.value;
+                const phone = this.userPhone.value;
+                const message = `🚀 Новая заявка на ГАЙД!\n👤 Имя: ${name}\n📞 Телефон: ${phone}`;
 
-        const url = `https://api.telegram.org/bot${token}/sendMessage?chat_id=${chatId}&text=${encodeURIComponent(message)}`;
+                const url = `https://api.telegram.org/bot${token}/sendMessage?chat_id=${chatId}&text=${encodeURIComponent(message)}`;
 
-  fetch(url)
-.then(response => {
-    if (response.ok) {
-        // 1. Показываем сообщение об успехе
-        alert('Спасибо! Ваш гайд открывается в новой вкладке.');
-        
-        // 2. АВТОМАТИЧЕСКИЙ ОТКРЫТИЕ ФАЙЛА
-        // Убедись, что файл guide.pdf лежит в корне сайта
-        window.open('https://yoga34.ru/guide.pdf', '_blank'); 
-        
-        // 3. Закрываем попап
-        popup.classList.remove('show');
-        localStorage.setItem('guideShown', 'true');
+                fetch(url)
+                    .then(response => {
+                        if (response.ok) {
+                            alert('Спасибо! Ваш гайд открывается в новой вкладке.');
+                            window.open('https://yoga34.ru/guide.pdf', '_blank'); 
+                            popup.classList.remove('show');
+                            localStorage.setItem('guideShown', 'true');
+                        } else {
+                            alert('Ошибка отправки в Telegram. Проверьте настройки бота.');
+                        }
+                    })
+                    .catch(err => console.error('Ошибка сети:', err));
+            };
+        }
     }
-});
-    }
-}
 
     /* --- 3. БУРГЕР-МЕНЮ --- */
-    const menuToggle = document.querySelector('.menu-toggle');
-    const nav = document.querySelector('.nav-links'); // Проверь, что в HTML именно .nav-links или nav
-    if (menuToggle && nav) {
-        menuToggle.onclick = () => nav.classList.toggle('active');
-    }
-});
