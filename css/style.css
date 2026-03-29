@@ -590,8 +590,9 @@ nav a:hover { color: var(--primary-color); }
 }
 
 .carousel-track {
-    display: flex;
+    display: flex; /* БЕЗ ЭТОГО НЕ ПОЕДЕТ */
     transition: transform 0.5s ease-in-out;
+    width: 100%; /* Контейнер для слайдов */
 }
 
 .review-card {
@@ -600,6 +601,7 @@ nav a:hover { color: var(--primary-color); }
     padding: 40px;
     background: #fff;
     box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+    flex-shrink: 0;  /* Запрещаем сжиматься */
 }
 
 .review-text {
