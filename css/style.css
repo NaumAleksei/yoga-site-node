@@ -570,6 +570,13 @@ nav a:hover { color: var(--primary-color); }
     overflow: hidden; /* Чтобы трек не вылезал за края сайта */
 }
 
+section-title {
+    text-align: center;
+    width: 100%;
+    margin-bottom: 40px;
+    display: block; /* Гарантирует, что он занимает всю ширину и центрирует текст */
+}
+
 .carousel-container {
     position: relative;
     max-width: 1000px;
@@ -590,10 +597,11 @@ nav a:hover { color: var(--primary-color); }
 }
 
 .carousel-track {
-    display: flex !important; /* Выстраивает слайды строго в ряд */
-    transition: transform 0.6s cubic-bezier(0.45, 0, 0.55, 1);
-    /* УБРАНО width: 100%, чтобы трек мог растягиваться под все слайды */
-    will-change: transform;
+    display: flex !important;
+    /* Ускоряем работу видеокарты для плавной анимации */
+    will-change: transform; 
+    /* Плавная кривая без рывков */
+    transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1) !important;
 }
 
 .review-card {
@@ -668,6 +676,11 @@ nav a:hover { color: var(--primary-color); }
         width: 36px;
         height: 36px;
         background: rgba(86, 107, 88, 0.7); /* Делаем чуть прозрачными */
+        
+        /* Отключаем трансформации при активном нажатии, чтобы не было прыжка */
+        active { transform: none !important; }
+        /* Убираем "отскок" */
+        transition: background 0.2s;
     }
 
     /* Чтобы кнопки не "прыгали", убираем любые ховер-эффекты трансформации на тачскринах */

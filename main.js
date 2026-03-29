@@ -6,39 +6,42 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (track && nextButton && prevButton && slides.length > 0) {
         let currentIndex = 0;
+        let autoPlayTimer;
 
-        // Принудительно задаем ширину слайдам, чтобы текст не тянулся
-        const setSlideWidth = () => {
-            const width = track.parentElement.getBoundingClientRect().width;
-            slides.forEach(slide => {
-                slide.style.width = width + 'px';
-            });
+        const updateSlider = (index) => {
+            // Двигаем строго по процентам
+            track.style.transform = `translateX(-${index * 100}%)`;
         };
-        
-        setSlideWidth();
-        window.addEventListener('resize', setSlideWidth);
 
-     const updateSlider = (index) => {
-    // Двигаем трек влево на 100% * номер слайда
-    track.style.transform = `translateX(-${index * 100}%)`;
-};
-
-        nextButton.addEventListener('click', () => {
+        const showNextSlide = () => {
             currentIndex = (currentIndex + 1) % slides.length;
             updateSlider(currentIndex);
+        };
+
+        const showPrevSlide = () => {
+            currentIndex = (currentIndex - 1 + slides.length) % slides.length;
+            updateSlider(currentIndex);
+        };
+
+        // Функция перезапуска таймера
+        const resetAutoPlay = () => {
+            clearInterval(autoPlayTimer);
+            autoPlayTimer = setInterval(showNextSlide, 5000); // 5 секунд
+        };
+
+        nextButton.addEventListener('click', () => {
+            showNextSlide();
+            resetAutoPlay(); // Сбрасываем таймер при ручном клике
         });
 
         prevButton.addEventListener('click', () => {
-            currentIndex = (currentIndex - 1 + slides.length) % slides.length;
-            updateSlider(currentIndex);
+            showPrevSlide();
+            resetAutoPlay(); // Сбрасываем таймер при ручном клике
         });
 
-        // Автопрокрутка
-        setInterval(() => nextButton.click(), 5000);
-        
-        console.log("Карусель готова, слайдов:", slides.length);
-    } else {
-        console.log("Элементы карусели не найдены. Проверь классы в HTML.");
+        // Запуск при загрузке
+        resetAutoPlay();
+
     }
 
     // Логика бургер-меню (если нужно)
