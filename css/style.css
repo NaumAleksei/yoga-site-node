@@ -629,43 +629,53 @@ nav a:hover { color: var(--primary-color); }
 }
 
 .carousel-btn {
+ position: absolute;
+    top: 50%;
+    /* Используем margin-top вместо translateY, чтобы избежать конфликтов при анимации */
+    margin-top: -22px; 
     background: var(--primary-color);
     color: white;
     border: none;
-    width: 50px;
-    height: 50px;
+    width: 44px;
+    height: 44px;
     border-radius: 50%;
     cursor: pointer;
-    font-size: 1.2rem;
+    z-index: 100;
     display: flex;
     align-items: center;
     justify-content: center;
-    flex-shrink: 0;
-    transition: var(--transition);
-    z-index: 10;
+    transition: background 0.3s, opacity 0.3s;
+    /* Убираем синее выделение при нажатии на мобилках */
+    -webkit-tap-highlight-color: transparent;
 }
+
+.prev-btn { left: 10px; }
+.next-btn { right: 10px; }
 
 .carousel-btn:hover {
     background: #445446;
     transform: scale(1.1);
 }
 
-/* Адаптивность для мобильных */
+/* Адаптив для мобильных устройств (до 768px) */
 @media (max-width: 768px) {
     .carousel-container {
-        padding: 0 10px;
+        padding: 0; /* Убираем лишние отступы */
+        position: relative;
     }
+
     .carousel-btn {
-        width: 40px;
-        height: 40px;
-        position: absolute;
-        top: 50%;
-        transform: translateY(-50%);
+        width: 36px;
+        height: 36px;
+        background: rgba(86, 107, 88, 0.7); /* Делаем чуть прозрачными */
     }
-    .prev-btn { left: -5px; }
-    .next-btn { right: -5px; }
+
+    /* Чтобы кнопки не "прыгали", убираем любые ховер-эффекты трансформации на тачскринах */
+    .carousel-btn:hover, .carousel-btn:active {
+        transform: none !important; 
+    }
     
-    .review-card {
-        padding: 40px 20px;
-    }
+    /* Если кнопки все равно мешают читать текст, можно сдвинуть их ниже */
+    .prev-btn { left: 5px; }
+    .next-btn { right: 5px; }
 }
