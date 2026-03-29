@@ -643,63 +643,67 @@ nav a:hover { color: var(--primary-color); }
 }
 
 .carousel-btn {
- position: absolute;
-    top: 50%;
-    /* Используем margin-top вместо translateY, чтобы избежать конфликтов при анимации */
-    margin-top: -22px; 
-    background: var(--primary-color);
-    color: white;
-    border: none;
-    border-radius: 50%;
-    cursor: pointer;
-    align-items: center;
-    justify-content: center;
-    transition: background 0.3s, opacity 0.3s;
-    /* Убираем синее выделение при нажатии на мобилках */
-    -webkit-tap-highlight-color: transparent;
-    display: flex !important; /* Убеждаемся, что они видны */
-    flex: 0 0 45px !important; /* Жестко задаем размер: не расти, не сжимайся, будь 45px */
+    position: absolute !important; /* Возвращаем абсолют, чтобы кнопки не расталкивали контент */
+    top: 50% !important;
+    transform: translateY(-50%) !important; /* Центрируем строго по вертикали */
+    background: var(--primary-color) !important;
+    color: white !important;
+    border: none !important;
+    border-radius: 50% !important;
+    cursor: pointer !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
     width: 45px !important;
     height: 45px !important;
+    z-index: 100 !important;
+    transition: background 0.3s, transform 0.3s !important;
     visibility: visible !important;
     opacity: 1 !important;
-    /* Убери position: absolute, если хочешь, чтобы кнопки стояли по бокам отзыва */
-    position: relative; 
-    z-index: 10;
+    -webkit-tap-highlight-color: transparent;
 }
 
-.prev-btn { left: 10px; }
-.next-btn { right: 10px; }
+.prev-btn { 
+    left: -60px !important; /* Выносим за пределы отзыва в веб-версии */
+}
+.next-btn { 
+    right: -60px !important; 
+}
 
 .carousel-btn:hover {
     background: #445446;
     transform: scale(1.1);
 }
 
-/* Адаптив для мобильных устройств (до 768px) */
+/* Если контейнер слишком прижат к краям экрана, уменьшим вынос */
+@media (max-width: 1100px) {
+    .prev-btn { left: 0px !important; }
+    .next-btn { right: 0px !important; }
+}
+
+.carousel-btn:hover {
+    background: #445446 !important;
+    transform: translateY(-50%) scale(1.1) !important;
+}
+
+/* --- АДАПТИВ ПОД МОБИЛКИ --- */
 @media (max-width: 768px) {
     .carousel-container {
-        padding: 0; /* Убираем лишние отступы */
-        position: relative;
+        padding: 0 40px !important; /* Даем место кнопкам внутри */
     }
 
     .carousel-btn {
-        width: 36px;
-        height: 36px;
-        background: rgba(86, 107, 88, 0.7); /* Делаем чуть прозрачными */
-
-        /* Отключаем трансформации при активном нажатии, чтобы не было прыжка */
-        active { transform: none !important; }
-        /* Убираем "отскок" */
-        transition: background 0.2s;
+        width: 36px !important;
+        height: 36px !important;
+        /* На мобилках прижимаем кнопки к краям, чтобы не перекрывали текст */
+        margin-top: 0 !important; 
     }
 
-    /* Чтобы кнопки не "прыгали", убираем любые ховер-эффекты трансформации на тачскринах */
+    .prev-btn { left: 5px !important; }
+    .next-btn { right: 5px !important; }
+
+    /* Убираем эффекты при нажатии, чтобы не дергалось */
     .carousel-btn:hover, .carousel-btn:active {
-        transform: none !important; 
+        transform: translateY(-50%) !important; 
     }
-    
-    /* Если кнопки все равно мешают читать текст, можно сдвинуть их ниже */
-    .prev-btn { left: 5px; }
-    .next-btn { right: 5px; }
 }
