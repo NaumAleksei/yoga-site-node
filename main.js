@@ -49,6 +49,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const guideForm = document.getElementById('popupGuideForm');
 
     if (popup && closeBtn) {
+        // Пока тестируем, ставим false. Когда всё заработает — вернем localStorage
         let shown = false; 
 
         const showPopup = () => {
@@ -58,8 +59,8 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         };
 
-        // Условия показа
-        setTimeout(showPopup, 5000);
+        // Условия автоматического показа
+        setTimeout(showPopup, 5000); // Через 5 секунд
 
         window.addEventListener('scroll', () => {
             const scrolled = window.scrollY;
@@ -71,8 +72,9 @@ document.addEventListener('DOMContentLoaded', () => {
             if (e.clientY < 0) showPopup();
         });
 
-        // Закрытие
+        // Закрытие окна
         closeBtn.onclick = () => popup.classList.remove('show');
+        
         window.addEventListener('click', (e) => {
             if (e.target === popup) popup.classList.remove('show');
         });
@@ -85,12 +87,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 const token = "8333117641:AAHr9lfejJ5Stss5V0dWbBm9y7Bpy4gz3WE";
                 const chatId = "1730787950";
 
-                // Проверяем наличие полей, чтобы не было ошибок
-                const nameField = this.querySelector('[name="userName"]');
-                const phoneField = this.querySelector('[name="userPhone"]');
-                
-                const name = nameField ? nameField.value : 'Имя не указано';
-                const phone = phoneField ? phoneField.value : 'Телефон не указан';
+                const name = this.userName ? this.userName.value : 'Не указано';
+                const phone = this.userPhone ? this.userPhone.value : 'Не указано';
                 const message = `🚀 Новая заявка на ГАЙД!\n👤 Имя: ${name}\n📞 Телефон: ${phone}`;
 
                 const url = `https://api.telegram.org/bot${token}/sendMessage?chat_id=${chatId}&text=${encodeURIComponent(message)}`;
@@ -103,19 +101,24 @@ document.addEventListener('DOMContentLoaded', () => {
                         popup.classList.remove('show');
                         localStorage.setItem('guideShown', 'true');
                     } else {
-                        alert('Ошибка отправки. Проверьте настройки бота.');
+                        alert('Ошибка отправки. Проверьте, запущен ли бот (/start).');
                     }
                 })
-                .catch(err => console.error('Ошибка:', err));
+                .catch(err => {
+                    console.error('Ошибка:', err);
+                    alert('Произошла ошибка при связи с сервером.');
+                });
             };
-        } // Конец блока guideForm
-    } // Конец блока popup
+        }
+    }
 
     /* --- 3. БУРГЕР-МЕНЮ --- */
     const menuToggle = document.querySelector('.menu-toggle');
-    const nav = document.querySelector('.nav-links'); 
-    if (menuToggle && nav) {
-        menuToggle.onclick = () => nav.classList.toggle('active');
+    const navLinks = document.querySelector('.nav-links'); 
+    
+    if (menuToggle && navLinks) {
+        menuToggle.onclick = () => {
+            navLinks.classList.toggle('active');
+        };
     }
-
-}); // ФИНАЛЬНАЯ СКОБКА (обязательна!)
+});
