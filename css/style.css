@@ -563,3 +563,84 @@ nav a:hover { color: var(--primary-color); }
         top: -30px;
     }
 }
+.reviews-section {
+    padding: 60px 20px;
+    background-color: #f9f7f4; /* Нежный "йога" фон */
+    text-align: center;
+}
+
+.section-title {
+    margin-bottom: 40px;
+    font-size: 2rem;
+    color: #333;
+}
+
+.carousel-container {
+    position: relative;
+    max-width: 800px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+}
+
+.carousel-wrapper {
+    overflow: hidden;
+    width: 100%;
+    border-radius: 15px;
+}
+
+.carousel-track {
+    display: flex;
+    transition: transform 0.5s ease-in-out;
+}
+
+.review-card {
+    min-width: 100%;
+    box-sizing: border-box;
+    padding: 40px;
+    background: #fff;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+}
+
+.review-text {
+    font-style: italic;
+    font-size: 1.2rem;
+    line-height: 1.6;
+    color: #555;
+    margin-bottom: 20px;
+}
+
+.review-author {
+    font-weight: bold;
+    color: #c7a17a; /* Золотистый/древесный акцент */
+}
+
+/* Кнопки прокрутки поверх отзывов */
+.carousel-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(199, 161, 122, 0.8);
+    color: white;
+    border: none;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    cursor: pointer;
+    z-index: 10;
+    transition: background 0.3s;
+}
+
+.carousel-btn:hover {
+    background: rgba(199, 161, 122, 1);
+}
+
+.prev-btn { left: -20px; }
+.next-btn { right: -20px; }
+
+/* Адаптивность для мобилок */
+@media (max-width: 600px) {
+    .prev-btn { left: 5px; }
+    .next-btn { right: 5px; }
+    .review-text { font-size: 1rem; }
+}

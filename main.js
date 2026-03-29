@@ -46,3 +46,28 @@ function openModal() {
         document.body.style.overflow = 'hidden'; // Запрещаем прокрутку при открытом окне
     }
 }
+const track = document.querySelector('.carousel-track');
+const slides = Array.from(track.children);
+const nextButton = document.querySelector('.next-btn');
+const prevButton = document.querySelector('.prev-btn');
+
+let currentIndex = 0;
+
+const updateSlider = (index) => {
+    track.style.transform = `translateX(-${index * 100}%)`;
+};
+
+nextButton.addEventListener('click', () => {
+    currentIndex = (currentIndex + 1) % slides.length;
+    updateSlider(currentIndex);
+});
+
+prevButton.addEventListener('click', () => {
+    currentIndex = (currentIndex - 1 + slides.length) % slides.length;
+    updateSlider(currentIndex);
+});
+
+// Автоматическая прокрутка каждые 5 секунд
+setInterval(() => {
+    nextButton.click();
+}, 5000);
