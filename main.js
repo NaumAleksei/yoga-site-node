@@ -85,23 +85,36 @@ if (popup && closeBtn) {
 
     // Отправка в Telegram
     if (guideForm) {
-        guideForm.onsubmit = function(e) {
-            e.preventDefault();
-            
-            const token = "ТВОЙ_ТОКЕН"; // Проверь, чтобы тут был токен от BotFather
-            const chatId = "ТВОЙ_ID";   // И твой ID от userinfobot
-            
-            const name = this.userName.value;
-            const phone = this.userPhone.value;
-            const message = `🧘‍♀️ Новый лид на ГАЙД!\n👤 Имя: ${name}\n📞 Тел: ${phone}`;
+        if (guideForm) {
+    guideForm.onsubmit = function(e) {
+        e.preventDefault();
 
-            fetch(`https://api.telegram.org/bot${token}/sendMessage?chat_id=${chatId}&text=${encodeURIComponent(message)}`)
-            .then(() => {
-                alert('Готово! Гайд открывается...');
-                window.open('guide.pdf', '_blank');
-                popup.classList.remove('show');
-            });
-        };
+        // --- НАСТРОЙКИ (Вставь свои данные) ---
+        const token = "8333117641:AAHr9lfejJ5Stss5V0dWbBm9y7Bpy4gz3WE";
+        const chatId = "1730787950";
+        // ---------------------------------------
+
+        const name = this.userName.value;
+        const phone = this.userPhone.value;
+        const message = `🚀 Новая заявка на ГАЙД!\n👤 Имя: ${name}\n📞 Телефон: ${phone}`;
+
+        const url = `https://api.telegram.org/bot${token}/sendMessage?chat_id=${chatId}&text=${encodeURIComponent(message)}`;
+
+        fetch(url)
+            .then(response => {
+                if (response.ok) {
+                    alert('Спасибо! Гайд отправлен в ваш Telegram.');
+                    // Ссылка на сам PDF файл, чтобы он открылся сразу
+                    window.open('https://yoga34.ru/guide.pdf', '_blank'); 
+                    popup.classList.remove('show');
+                    localStorage.setItem('guideShown', 'true');
+                } else {
+                    alert('Ошибка отправки. Попробуйте еще раз.');
+                }
+            })
+            .catch(error => console.error('Ошибка:', error));
+    };
+}
     }
 }
 
