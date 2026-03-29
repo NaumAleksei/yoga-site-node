@@ -565,26 +565,29 @@ nav a:hover { color: var(--primary-color); }
 }
 /* --- 12. КАРУСЕЛЬ ОТЗЫВОВ (ИСПРАВЛЕНО) --- */
 .reviews-section {
+    display: flex !important;
+    flex-direction: column !important; /* Выстраивает Заголовок и Карусель вертикально */
+    align-items: center !important;    /* Центрирует всё содержимое по горизонтали */
     padding: 80px 0;
-    background-color: #f9f7f4;
-    overflow: hidden; /* Чтобы трек не вылезал за края сайта */
-}
-
-section-title {
-    text-align: center;
     width: 100%;
-    margin-bottom: 40px;
-    display: block; /* Гарантирует, что он занимает всю ширину и центрирует текст */
 }
 
+.section-title {
+    width: 100%;
+    text-align: center !important;
+    margin-bottom: 50px; /* Отступ от заголовка до самой карусели */
+    display: block !important;
+}
+
+/* Контейнер карусели внутри секции остается горизонтальным */
 .carousel-container {
-    position: relative;
-    max-width: 1000px;
-    margin: 0 auto;
-    display: flex;
+    display: flex !important;
+    flex-direction: row !important; /* Кнопки и слайды в одну линию */
     align-items: center;
     justify-content: center;
-    gap: 20px; /* Расстояние между кнопками и текстом */
+    width: 100%;
+    max-width: 1000px;
+    margin: 0 auto;
 }
 
 .carousel-wrapper {
@@ -676,7 +679,7 @@ section-title {
         width: 36px;
         height: 36px;
         background: rgba(86, 107, 88, 0.7); /* Делаем чуть прозрачными */
-        
+
         /* Отключаем трансформации при активном нажатии, чтобы не было прыжка */
         active { transform: none !important; }
         /* Убираем "отскок" */
