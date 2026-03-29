@@ -563,66 +563,109 @@ nav a:hover { color: var(--primary-color); }
         top: -30px;
     }
 }
+/* --- 12. КАРУСЕЛЬ ОТЗЫВОВ (ИСПРАВЛЕНО) --- */
 .reviews-section {
-    padding: 60px 0;
+    padding: 80px 0;
     background-color: #f9f7f4;
-    text-align: center;
+    overflow: hidden; /* Чтобы трек не вылезал за края сайта */
 }
 
 .carousel-container {
     position: relative;
-    max-width: 900px;
+    max-width: 1000px;
     margin: 0 auto;
-    display: flex; /* Выравниваем кнопки и окно в ряд */
+    display: flex;
     align-items: center;
     justify-content: center;
+    gap: 20px; /* Расстояние между кнопками и текстом */
 }
 
 .carousel-wrapper {
-overflow: hidden;
+    overflow: hidden; /* Это наше "окно" */
     width: 100%;
-    max-width: 700px; /* Фиксируем ширину видимой области */
-    margin: 0 auto;
+    max-width: 700px; 
+    background: #fff;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.05);
 }
 
 .carousel-track {
-    display: flex !important; /* Принудительно в ряд */
-    transition: transform 0.5s ease;
-    width: 100%;
+    display: flex !important; /* Выстраивает слайды строго в ряд */
+    transition: transform 0.6s cubic-bezier(0.45, 0, 0.55, 1);
+    /* УБРАНО width: 100%, чтобы трек мог растягиваться под все слайды */
+    will-change: transform;
 }
 
 .review-card {
-   flex: 0 0 100% !important; /* Запрещаем сжиматься, ширина строго 100% */
+    flex: 0 0 100% !important; /* Каждый слайд ровно 100% от ширины wrapper */
     width: 100%;
-    padding: 30px;
+    padding: 50px 40px;
     box-sizing: border-box;
-    display: block; /* Чтобы текст внутри переносился по строкам */
+    display: flex !important;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
 }
 
 .review-text {
-    display: block;
+    display: block !important;
     width: 100%;
-    word-wrap: break-word; /* Перенос длинных слов */
-    white-space: normal;   /* ЗАПРЕЩАЕМ тексту идти в одну бесконечную линию */
-    line-height: 1.5;
+    max-width: 600px;
+    margin: 0 auto 25px auto;
+    font-style: italic;
+    font-size: 1.15rem;
+    line-height: 1.6;
+    color: #555;
+    /* Исправляем растягивание в линию */
+    white-space: normal !important; 
+    word-wrap: break-word;
 }
 
 .review-author {
-    color: #c7a17a;
+    color: var(--primary-color);
     font-weight: 700;
+    font-size: 1.1rem;
+    margin: 0;
 }
 
 .carousel-btn {
-    background: #c7a17a;
+    background: var(--primary-color);
     color: white;
     border: none;
-    width: 45px;
-    height: 45px;
+    width: 50px;
+    height: 50px;
     border-radius: 50%;
     cursor: pointer;
     font-size: 1.2rem;
-    flex-shrink: 0; /* Чтобы кнопка не сплющилась */
-    transition: 0.3s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    transition: var(--transition);
+    z-index: 10;
 }
 
-.carousel-btn:hover { background: #b08d68; }
+.carousel-btn:hover {
+    background: #445446;
+    transform: scale(1.1);
+}
+
+/* Адаптивность для мобильных */
+@media (max-width: 768px) {
+    .carousel-container {
+        padding: 0 10px;
+    }
+    .carousel-btn {
+        width: 40px;
+        height: 40px;
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+    }
+    .prev-btn { left: -5px; }
+    .next-btn { right: -5px; }
+    
+    .review-card {
+        padding: 40px 20px;
+    }
+}
