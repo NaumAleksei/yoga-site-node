@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // 1. Бургер-меню
+    // === 1. БУРГЕР-МЕНЮ ===
     const menuToggle = document.querySelector('.menu-toggle');
     const nav = document.querySelector('.nav-links');
 
@@ -9,7 +9,6 @@ document.addEventListener('DOMContentLoaded', () => {
             menuToggle.innerHTML = nav.classList.contains('active') ? '&times;' : '&#9776;';
         });
 
-        // Закрытие меню при клике на ссылку
         document.querySelectorAll('.nav-links a').forEach(link => {
             link.addEventListener('click', () => {
                 nav.classList.remove('active');
@@ -17,57 +16,64 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         });
     }
+
+    // === 2. КАРУСЕЛЬ ОТЗЫВОВ ===
+    const track = document.querySelector('.carousel-track');
+    const nextButton = document.querySelector('.next-btn');
+    const prevButton = document.querySelector('.prev-btn');
+
+    // Проверяем, существуют ли элементы карусели на странице
+    if (track && nextButton && prevButton) {
+        const slides = Array.from(track.children);
+        let currentIndex = 0;
+
+        const updateSlider = (index) => {
+            track.style.transform = `translateX(-${index * 100}%)`;
+        };
+
+        nextButton.addEventListener('click', () => {
+            currentIndex = (currentIndex + 1) % slides.length;
+            updateSlider(currentIndex);
+        });
+
+        prevButton.addEventListener('click', () => {
+            currentIndex = (currentIndex - 1 + slides.length) % slides.length;
+            updateSlider(currentIndex);
+        });
+
+        // Автоматическая прокрутка каждые 5 секунд
+        let autoPlay = setInterval(() => {
+            nextButton.click();
+        }, 5000);
+
+        // Остановка автоплея при взаимодействии
+        const stopAutoPlay = () => clearInterval(autoPlay);
+        nextButton.addEventListener('mouseenter', stopAutoPlay);
+        prevButton.addEventListener('mouseenter', stopAutoPlay);
+    }
 });
 
-// 2. Функции модального окна
-// Выносим их из DOMContentLoaded, чтобы атрибут onclick="closeModal()" в HTML мог их найти
+// === 3. МОДАЛЬНОЕ ОКНО (Глобальные функции) ===
 function closeModal() {
     const modal = document.getElementById('successModal');
     if (modal) {
         modal.style.display = 'none';
-        // Возвращаем прокрутку страницы, если вы её отключали
         document.body.style.overflow = 'auto'; 
     }
 }
 
-// Закрытие по клику на серый фон вокруг окна
-window.onclick = function(event) {
+function openModal() {
+    const modal = document.getElementById('successModal');
+    if (modal) {
+        modal.style.display = 'flex';
+        document.body.style.overflow = 'hidden';
+    }
+}
+
+// Закрытие по клику на фон
+window.addEventListener('click', (event) => {
     const modal = document.getElementById('successModal');
     if (event.target === modal) {
         closeModal();
     }
-};
-
-// Функция открытия (вызывайте её в обработчике отправки формы)
-function openModal() {
-    const modal = document.getElementById('successModal');
-    if (modal) {
-        modal.style.display = 'flex'; // Используем flex, чтобы окно было по центру
-        document.body.style.overflow = 'hidden'; // Запрещаем прокрутку при открытом окне
-    }
-}
-const track = document.querySelector('.carousel-track');
-const slides = Array.from(track.children);
-const nextButton = document.querySelector('.next-btn');
-const prevButton = document.querySelector('.prev-btn');
-
-let currentIndex = 0;
-
-const updateSlider = (index) => {
-    track.style.transform = `translateX(-${index * 100}%)`;
-};
-
-nextButton.addEventListener('click', () => {
-    currentIndex = (currentIndex + 1) % slides.length;
-    updateSlider(currentIndex);
 });
-
-prevButton.addEventListener('click', () => {
-    currentIndex = (currentIndex - 1 + slides.length) % slides.length;
-    updateSlider(currentIndex);
-});
-
-// Автоматическая прокрутка каждые 5 секунд
-setInterval(() => {
-    nextButton.click();
-}, 5000);
