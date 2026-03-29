@@ -100,21 +100,21 @@ if (popup && closeBtn) {
 
         const url = `https://api.telegram.org/bot${token}/sendMessage?chat_id=${chatId}&text=${encodeURIComponent(message)}`;
 
-        fetch(url)
-            .then(response => {
-                if (response.ok) {
-                    alert('Спасибо! Гайд отправлен в ваш Telegram.');
-                    // Ссылка на сам PDF файл, чтобы он открылся сразу
-                    window.open('https://yoga34.ru/guide.pdf', '_blank'); 
-                    popup.classList.remove('show');
-                    localStorage.setItem('guideShown', 'true');
-                } else {
-                    alert('Ошибка отправки. Попробуйте еще раз.');
-                }
-            })
-            .catch(error => console.error('Ошибка:', error));
-    };
-}
+  fetch(url)
+.then(response => {
+    if (response.ok) {
+        // 1. Показываем сообщение об успехе
+        alert('Спасибо! Ваш гайд открывается в новой вкладке.');
+        
+        // 2. АВТОМАТИЧЕСКИЙ ОТКРЫТИЕ ФАЙЛА
+        // Убедись, что файл guide.pdf лежит в корне сайта
+        window.open('https://yoga34.ru/guide.pdf', '_blank'); 
+        
+        // 3. Закрываем попап
+        popup.classList.remove('show');
+        localStorage.setItem('guideShown', 'true');
+    }
+});
     }
 }
 
