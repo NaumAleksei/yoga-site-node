@@ -41,52 +41,69 @@ document.addEventListener('DOMContentLoaded', () => {
         resetAutoPlay();
     }
 
-    /* --- 2. ПОПАП (Безопасный блок) --- */
-    const popup = document.getElementById('guidePopup');
-    const closeBtn = document.getElementById('closePopupBtn');
-    const guideForm = document.getElementById('popupGuideForm');
+   /* --- 2. ПОПАП (Улучшенная версия) --- */
+const popup = document.getElementById('guidePopup');
+const closeBtn = document.getElementById('closePopupBtn');
+const guideForm = document.getElementById('popupGuideForm');
 
-    // Проверяем наличие попапа перед тем, как вешать события
-    if (popup && closeBtn) {
-        let shown = localStorage.getItem('guideShown');
+if (popup && closeBtn) {
+    // ВАЖНО: Пока тестируешь, закомментируй строку с localStorage ниже, 
+    // чтобы окно всплывало КАЖДЫЙ раз при обновлении.
+    // let shown = localStorage.getItem('guideShown'); 
+    let shown = false; // Для тестов ставим false
 
-        const showPopup = () => {
-            if (!shown) {
-                popup.classList.add('show');
-                // localStorage.setItem('guideShown', 'true'); // Раскомментируй это, чтобы скрыть после 1-го показа
-            }
-        };
-
-        window.addEventListener('scroll', () => {
-            const scrolled = window.scrollY;
-            const totalHeight = document.documentElement.scrollHeight - window.innerHeight;
-            // Показываем, если пролистали больше половины
-            if (scrolled > totalHeight / 2) {
-                showPopup();
-            }
-        });
-
-        closeBtn.onclick = () => {
-            popup.classList.remove('show');
-            localStorage.setItem('guideShown', 'true'); // Считаем "просмотренным" при закрытии
-        };
-
-        window.addEventListener('click', (e) => {
-            if (e.target === popup) {
-                popup.classList.remove('show');
-                localStorage.setItem('guideShown', 'true');
-            }
-        });
-
-        if (guideForm) {
-            guideForm.onsubmit = function(e) {
-                e.preventDefault();
-                alert('Спасибо! Мы отправили гайд в WhatsApp.');
-                popup.classList.remove('show');
-                localStorage.setItem('guideShown', 'true');
-            };
+    const showPopup = () => {
+        if (!shown) {
+            popup.classList.add('show');
+            // localStorage.setItem('guideShown', 'true'); // Включишь, когда всё доделаем
+            shown = true; 
         }
+    };
+
+    // А) Показать через 5 секунд после загрузки
+    setTimeout(showPopup, 5000);
+
+    // Б) Показать при скролле (если пролистали 30% страницы)
+    window.addEventListener('scroll', () => {
+        const scrolled = window.scrollY;
+        const threshold = document.documentElement.scrollHeight * 0.3; 
+        if (scrolled > threshold) {
+            showPopup();
+        }
+    });
+
+    // В) Показать, если мышка уходит вверх (попытка закрыть вкладку)
+    document.addEventListener('mouseleave', (e) => {
+        if (e.clientY < 0) showPopup();
+    });
+
+    // Закрытие
+    closeBtn.onclick = () => popup.classList.remove('show');
+    window.addEventListener('click', (e) => {
+        if (e.target === popup) popup.classList.remove('show');
+    });
+
+    // Отправка в Telegram
+    if (guideForm) {
+        guideForm.onsubmit = function(e) {
+            e.preventDefault();
+            
+            const token = "ТВОЙ_ТОКЕН"; // Проверь, чтобы тут был токен от BotFather
+            const chatId = "ТВОЙ_ID";   // И твой ID от userinfobot
+            
+            const name = this.userName.value;
+            const phone = this.userPhone.value;
+            const message = `🧘‍♀️ Новый лид на ГАЙД!\n👤 Имя: ${name}\n📞 Тел: ${phone}`;
+
+            fetch(`https://api.telegram.org/bot${token}/sendMessage?chat_id=${chatId}&text=${encodeURIComponent(message)}`)
+            .then(() => {
+                alert('Готово! Гайд открывается...');
+                window.open('guide.pdf', '_blank');
+                popup.classList.remove('show');
+            });
+        };
     }
+}
 
     /* --- 3. БУРГЕР-МЕНЮ --- */
     const menuToggle = document.querySelector('.menu-toggle');
