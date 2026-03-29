@@ -17,16 +17,18 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-   // 1. Карусель
+    // === 2. КАРУСЕЛЬ ОТЗЫВОВ ===
     const track = document.querySelector('.carousel-track');
-    const slides = Array.from(track ? track.children : []);
     const nextButton = document.querySelector('.next-btn');
     const prevButton = document.querySelector('.prev-btn');
     
-    if (track && slides.length > 0) {
+    // Проверяем наличие трека и кнопок
+    if (track && nextButton && prevButton) {
+        const slides = Array.from(track.children);
         let currentIndex = 0;
 
         const updateSlider = (index) => {
+            // Двигаем трек
             track.style.transform = `translateX(-${index * 100}%)`;
         };
 
@@ -41,8 +43,12 @@ document.addEventListener('DOMContentLoaded', () => {
         });
 
         // Автопрокрутка
-        setInterval(() => nextButton.click(), 6000);
+        setInterval(() => {
+            nextButton.click();
+        }, 6000);
     }
+}); // <--- ВОТ ЭТА СКОБКА БЫЛА ПРОПУЩЕНА!
+
 // === 3. МОДАЛЬНОЕ ОКНО (Глобальные функции) ===
 function closeModal() {
     const modal = document.getElementById('successModal');
@@ -60,7 +66,6 @@ function openModal() {
     }
 }
 
-// Закрытие по клику на фон
 window.addEventListener('click', (event) => {
     const modal = document.getElementById('successModal');
     if (event.target === modal) {
