@@ -49,7 +49,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const guideForm = document.getElementById('popupGuideForm');
 
     if (popup && closeBtn) {
-        // Замени на localStorage.getItem('guideShown'), когда закончишь тесты
+        // Когда закончишь тесты, замени false на localStorage.getItem('guideShown')
         let isPopupShown = false; 
 
         const showPopup = () => {
@@ -69,51 +69,38 @@ document.addEventListener('DOMContentLoaded', () => {
 
         if (guideForm) {
             guideForm.onsubmit = function(e) {
-    e.preventDefault();
+                e.preventDefault();
 
-    const name = this.userName.value || 'Не указано';
-    const phone = this.userPhone.value || 'Не указано';
-    const time = new Date().toLocaleTimeString();
+                const name = this.userName.value || 'Не указано';
+                const phone = this.userPhone.value || 'Не указано';
+                const time = new Date().toLocaleTimeString();
 
-    // Отправляем данные не в Телеграм напрямую, а на наш сервер в Vercel
-    fetch('/api/send-telegram', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ name, phone, time })
-    })
-    .then(response => {
-        if (response.ok) {
-            localStorage.setItem('guideShown', 'true');
-            alert('Спасибо! Сейчас откроется ваш гайд.');
-            window.location.assign('https://yoga34.ru/guide.pdf');
-        } else {
-            alert('Ошибка отправки. Попробуйте позже.');
-        }
-    })
-    .catch(err => {
-        console.error('Ошибка:', err);
-        window.location.assign('https://yoga34.ru/guide.pdf');
-    });
-};
-
-                const url = `https://api.telegram.org/bot${token}/sendMessage?chat_id=${chatId}&text=${encodeURIComponent(message)}&parse_mode=Markdown&reply_markup=${encodeURIComponent(JSON.stringify(keyboard))}`;
-
-                fetch(url)
-                    .then(response => {
-                        if (response.ok) {
-                            localStorage.setItem('guideShown', 'true');
-                            alert('Спасибо! Сейчас откроется ваш гайд.');
-                            // Редирект для iPhone (открывает в той же вкладке)
-                            window.location.assign('https://yoga34.ru/guide.pdf');
-                        } else {
-                            alert('Ошибка отправки формы.');
+                // Отправляем данные через твой защищенный API в Vercel
+                fetch('/api/send-telegram', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ name, phone, time })
+                })
+                .then(response => {
+                    if (response.ok) {
+                        // 1. ОТПРАВЛЯЕМ ЦЕЛЬ В МЕТРИКУ
+                        if (typeof ym !== 'undefined') {
+                            ym(108172717, 'reachGoal', 'GIFT_ORDER');
                         }
-                    })
-                    .catch(err => {
-                        console.error('Ошибка:', err);
-                        // Даже если телеграм упал, даем скачать файл
+                        
+                        // 2. СОХРАНЯЕМ СОСТОЯНИЕ И РЕДИРЕКТИМ
+                        localStorage.setItem('guideShown', 'true');
+                        alert('Спасибо! Сейчас откроется ваш гайд.');
                         window.location.assign('https://yoga34.ru/guide.pdf');
-                    });
+                    } else {
+                        alert('Ошибка отправки. Попробуйте позже.');
+                    }
+                })
+                .catch(err => {
+                    console.error('Ошибка:', err);
+                    // Даже если ошибка сети, даем скачать файл
+                    window.location.assign('https://yoga34.ru/guide.pdf');
+                });
             }; // Конец onsubmit
         } // Конец if guideForm
     } // Конец if popup
