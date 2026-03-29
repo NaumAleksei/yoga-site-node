@@ -579,36 +579,32 @@ nav a:hover { color: var(--primary-color); }
 }
 
 .carousel-wrapper {
-    overflow: hidden; /* Это наше "окно" */
+overflow: hidden;
     width: 100%;
-    max-width: 700px; /* Ширина одного отзыва */
-    margin: 0 15px;
-    border-radius: 15px;
-    background: #fff;
-    box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+    max-width: 700px; /* Фиксируем ширину видимой области */
+    margin: 0 auto;
 }
 
 .carousel-track {
-    display: flex; /* Ставим слайды в горизонтальную шеренгу */
-    transition: transform 0.5s ease-in-out;
+    display: flex !important; /* Принудительно в ряд */
+    transition: transform 0.5s ease;
     width: 100%;
 }
 
 .review-card {
-    /* flex: grow | shrink | basis */
-    flex: 0 0 100%; /* ЗАПРЕЩАЕТ сжиматься и фиксирует ширину на 100% от wrapper */
+   flex: 0 0 100% !important; /* Запрещаем сжиматься, ширина строго 100% */
     width: 100%;
-    padding: 50px 40px;
+    padding: 30px;
     box-sizing: border-box;
+    display: block; /* Чтобы текст внутри переносился по строкам */
 }
 
 .review-text {
-    font-style: italic;
-    font-size: 1.15rem;
-    line-height: 1.6;
-    color: #444;
-    margin-bottom: 25px;
-    word-wrap: break-word; /* Чтобы текст не вылезал */
+    display: block;
+    width: 100%;
+    word-wrap: break-word; /* Перенос длинных слов */
+    white-space: normal;   /* ЗАПРЕЩАЕМ тексту идти в одну бесконечную линию */
+    line-height: 1.5;
 }
 
 .review-author {
