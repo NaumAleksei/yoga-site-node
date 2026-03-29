@@ -707,3 +707,98 @@ nav a:hover { color: var(--primary-color); }
         transform: translateY(-50%) !important; 
     }
 }
+.guide-overlay {
+    display: none; /* Скрыто по умолчанию */
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: rgba(0,0,0,0.7);
+    backdrop-filter: blur(8px);
+    z-index: 9999;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+}
+
+.guide-overlay.show {
+    display: flex;
+    opacity: 1;
+}
+
+.guide-modal {
+    background: #fff;
+    width: 90%;
+    max-width: 800px;
+    border-radius: 30px;
+    position: relative;
+    overflow: hidden;
+    animation: slidePop 0.5s ease;
+}
+
+@keyframes slidePop {
+    from { transform: translateY(50px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}
+
+.guide-grid {
+    display: grid;
+    grid-template-columns: 1fr 1.2fr;
+}
+
+.guide-img-side img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.guide-form-side {
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.guide-badge {
+    color: var(--primary-color);
+    font-weight: bold;
+    font-size: 0.9rem;
+    margin-bottom: 10px;
+    display: block;
+}
+
+.guide-form-side h3 {
+    font-size: 2rem;
+    margin: 0 0 15px 0;
+    line-height: 1.2;
+}
+
+.popup-form {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-top: 20px;
+}
+
+.popup-form input {
+    padding: 14px 20px;
+    border-radius: 50px;
+    border: 1px solid #ddd;
+    font-size: 1rem;
+}
+
+.close-popup {
+    position: absolute;
+    top: 15px; right: 20px;
+    font-size: 35px;
+    border: none; background: none;
+    cursor: pointer;
+    color: #888;
+    z-index: 10;
+}
+
+@media (max-width: 768px) {
+    .guide-grid { grid-template-columns: 1fr; }
+    .guide-img-side { display: none; } /* На мобилках скрываем картинку, чтобы не мешала форме */
+    .guide-form-side { padding: 30px 20px; text-align: center; }
+}
