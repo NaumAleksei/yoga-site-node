@@ -153,6 +153,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 alert('Произошла ошибка. Напишите нам в Telegram напрямую.');
             }
         });
+    }
 
 
 
