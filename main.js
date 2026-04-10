@@ -49,7 +49,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const guideForm = document.getElementById('popupGuideForm');
 
     if (popup && closeBtn) {
-        // Когда закончишь тесты, замени false на localStorage.getItem('guideShown')
         let isPopupShown = localStorage.getItem('guideShown'); 
 
         const showPopup = () => {
@@ -75,20 +74,16 @@ document.addEventListener('DOMContentLoaded', () => {
                 const phone = this.userPhone.value || 'Не указано';
                 const time = new Date().toLocaleTimeString();
 
-                // Отправляем данные через твой защищенный API в Vercel
                 fetch('/api/send-telegram', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ name, phone, time })
+                    body: JSON.stringify({ name, phone, time, type: '🎁 ГАЙД' })
                 })
                 .then(response => {
                     if (response.ok) {
-                        // 1. ОТПРАВЛЯЕМ ЦЕЛЬ В МЕТРИКУ
                         if (typeof ym !== 'undefined') {
                             ym(108172717, 'reachGoal', 'GIFT_ORDER');
                         }
-                        
-                        // 2. СОХРАНЯЕМ СОСТОЯНИЕ И РЕДИРЕКТИМ
                         localStorage.setItem('guideShown', 'true');
                         alert('Спасибо! Сейчас откроется ваш гайд.');
                         window.location.assign('https://yoga34.ru/guide.pdf');
@@ -98,37 +93,38 @@ document.addEventListener('DOMContentLoaded', () => {
                 })
                 .catch(err => {
                     console.error('Ошибка:', err);
-                    // Даже если ошибка сети, даем скачать файл
                     window.location.assign('https://yoga34.ru/guide.pdf');
                 });
-            }; // Конец onsubmit
-        } // Конец if guideForm
-    } // Конец if popup
+            };
+        }
+    }
 
-    // 8. МОДАЛЬНОЕ ОКНО: ОБРАТНЫЙ ЗВОНОК
+    /* --- 8. МОДАЛЬНОЕ ОКНО: ОБРАТНЫЙ ЗВОНОК --- */
     const callbackModal = document.getElementById('callback-modal');
-    const openCallback = document.getElementById('open-callback');
+    // Ищем все кнопки с классом .open-callback (для десктопа и мобилки)
+    const openCallbackBtns = document.querySelectorAll('.open-callback'); 
     const closeCallback = document.getElementById('close-callback');
     const callbackForm = document.getElementById('callback-form');
 
-    if (openCallback && callbackModal) {
-        openCallback.addEventListener('click', (e) => {
-            e.preventDefault();
-            e.stopPropagation();
-            callbackModal.style.display = 'flex';
-            document.body.style.overflow = 'hidden';
+    if (callbackModal && openCallbackBtns.length > 0) {
+        openCallbackBtns.forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                callbackModal.style.display = 'flex';
+                document.body.style.overflow = 'hidden';
+            });
         });
 
-        closeCallback?.addEventListener('click', () => {
+        const hideModal = () => {
             callbackModal.style.display = 'none';
             document.body.style.overflow = '';
-        });
+        };
 
-        callbackModal.addEventListener('click', (e) => {
-            if (e.target === callbackModal) {
-                callbackModal.style.display = 'none';
-                document.body.style.overflow = '';
-            }
+        closeCallback?.addEventListener('click', hideModal);
+        
+        window.addEventListener('click', (e) => {
+            if (e.target === callbackModal) hideModal();
         });
     }
 
@@ -136,26 +132,44 @@ document.addEventListener('DOMContentLoaded', () => {
         callbackForm.addEventListener('submit', async (e) => {
             e.preventDefault();
             
+            const submitBtn = callbackForm.querySelector('.cta-button');
+            const originalBtnText = submitBtn.innerText;
+            
+            // Визуальный фидбек
+            submitBtn.innerText = 'Отправка...';
+            submitBtn.disabled = true;
+
             const data = {
                 name: document.getElementById('callback-name').value,
                 phone: document.getElementById('callback-phone').value,
-                type: '📞 Запрос обратного звонка'
+                time: new Date().toLocaleTimeString(),
+                type: '📞 ЗАКАЗ ЗВОНКА'
             };
 
-            const success = await sendToTelegram(data);
+            try {
+                const response = await fetch('/api/send-telegram', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(data)
+                });
 
-            if (success) {
-                alert('Заявка отправлена! Свяжусь с вами в ближайшее время.');
-                callbackForm.reset();
-                callbackModal.style.display = 'none';
-                document.body.style.overflow = '';
-            } else {
+                if (response.ok) {
+                    alert('Заявка отправлена! Свяжусь с вами в ближайшее время.');
+                    callbackForm.reset();
+                    callbackModal.style.display = 'none';
+                    document.body.style.overflow = '';
+                } else {
+                    throw new Error('Server Error');
+                }
+            } catch (err) {
+                console.error('Ошибка:', err);
                 alert('Произошла ошибка. Напишите нам в Telegram напрямую.');
+            } finally {
+                submitBtn.innerText = originalBtnText;
+                submitBtn.disabled = false;
             }
         });
     }
-
-
 
     /* --- 3. БУРГЕР-МЕНЮ --- */
     const menuToggle = document.querySelector('.menu-toggle');

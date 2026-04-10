@@ -1001,3 +1001,29 @@ nav a:hover { color: var(--primary-color); }
     font-size: 1rem;
     box-sizing: border-box; /* Чтобы инпуты не вылезали за края */
 }
+
+#callback-form .cta-button {
+    width: 100%;             /* Растягиваем на всю ширину */
+    border: none;            /* Убираем системную рамку */
+    outline: none;           /* Убираем контур при клике */
+    padding: 16px;           /* Делаем её «пухлой» и удобной для пальца */
+    background-color: var(--primary-color);
+    color: white !important;
+    border-radius: 15px;     /* Скругляем под стиль карточек */
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-top: 10px;        /* Отступ от инпутов */
+    display: block;
+}
+
+#callback-form .cta-button:hover {
+    filter: brightness(1.1);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(86, 107, 88, 0.3);
+}
+
+#callback-form .cta-button:active {
+    transform: translateY(0);
+}
