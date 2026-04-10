@@ -846,6 +846,8 @@ nav a:hover { color: var(--primary-color); }
 
 /* Общие стили для кружочков */
 .contact-bubble {
+    font-family: "Font Awesome 6 Free", "Font Awesome 6 Brands", sans-serif; /* Гарантируем шрифт */
+    font-weight: 900; /* Важно для Solid иконок Font Awesome */
     display: flex;
     align-items: center;
     justify-content: center;
