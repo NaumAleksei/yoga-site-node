@@ -69,7 +69,6 @@ document.addEventListener('DOMContentLoaded', () => {
         if (guideForm) {
             guideForm.onsubmit = function(e) {
                 e.preventDefault();
-
                 const name = this.userName.value || 'Не указано';
                 const phone = this.userPhone.value || 'Не указано';
                 const time = new Date().toLocaleTimeString();
@@ -101,7 +100,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     /* --- 8. МОДАЛЬНОЕ ОКНО: ОБРАТНЫЙ ЗВОНОК --- */
     const callbackModal = document.getElementById('callback-modal');
-    // Ищем все кнопки с классом .open-callback (для десктопа и мобилки)
     const openCallbackBtns = document.querySelectorAll('.open-callback'); 
     const closeCallback = document.getElementById('close-callback');
     const callbackForm = document.getElementById('callback-form');
@@ -109,7 +107,11 @@ document.addEventListener('DOMContentLoaded', () => {
     if (callbackModal && openCallbackBtns.length > 0) {
         openCallbackBtns.forEach(btn => {
             btn.addEventListener('click', (e) => {
-                e.preventDefault();
+                // Если это ссылка (мобильная кнопка), не отменяем звонок, 
+                // но для десктопной кнопки открываем модалку.
+                if (btn.tagName !== 'A') {
+                    e.preventDefault();
+                }
                 e.stopPropagation();
                 callbackModal.style.display = 'flex';
                 document.body.style.overflow = 'hidden';
@@ -132,10 +134,10 @@ document.addEventListener('DOMContentLoaded', () => {
         callbackForm.addEventListener('submit', async (e) => {
             e.preventDefault();
             
-            const submitBtn = callbackForm.querySelector('.cta-button');
+            // Заменили .cta-button на .book-btn, так как у вас такой класс в HTML
+            const submitBtn = callbackForm.querySelector('.book-btn');
             const originalBtnText = submitBtn.innerText;
             
-            // Визуальный фидбек
             submitBtn.innerText = 'Отправка...';
             submitBtn.disabled = true;
 
