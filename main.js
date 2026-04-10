@@ -50,7 +50,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (popup && closeBtn) {
         // Когда закончишь тесты, замени false на localStorage.getItem('guideShown')
-        let isPopupShown = false; 
+        let isPopupShown = localStorage.getItem('guideShown'); 
 
         const showPopup = () => {
             if (!isPopupShown) {
@@ -104,6 +104,57 @@ document.addEventListener('DOMContentLoaded', () => {
             }; // Конец onsubmit
         } // Конец if guideForm
     } // Конец if popup
+
+    // 8. МОДАЛЬНОЕ ОКНО: ОБРАТНЫЙ ЗВОНОК
+    const callbackModal = document.getElementById('callback-modal');
+    const openCallback = document.getElementById('open-callback');
+    const closeCallback = document.getElementById('close-callback');
+    const callbackForm = document.getElementById('callback-form');
+
+    if (openCallback && callbackModal) {
+        openCallback.addEventListener('click', (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            callbackModal.style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+        });
+
+        closeCallback?.addEventListener('click', () => {
+            callbackModal.style.display = 'none';
+            document.body.style.overflow = '';
+        });
+
+        callbackModal.addEventListener('click', (e) => {
+            if (e.target === callbackModal) {
+                callbackModal.style.display = 'none';
+                document.body.style.overflow = '';
+            }
+        });
+    }
+
+    if (callbackForm) {
+        callbackForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const data = {
+                name: document.getElementById('callback-name').value,
+                phone: document.getElementById('callback-phone').value,
+                type: '📞 Запрос обратного звонка'
+            };
+
+            const success = await sendToTelegram(data);
+
+            if (success) {
+                alert('Заявка отправлена! Свяжусь с вами в ближайшее время.');
+                callbackForm.reset();
+                callbackModal.style.display = 'none';
+                document.body.style.overflow = '';
+            } else {
+                alert('Произошла ошибка. Напишите нам в Telegram напрямую.');
+            }
+        });
+
+
 
     /* --- 3. БУРГЕР-МЕНЮ --- */
     const menuToggle = document.querySelector('.menu-toggle');

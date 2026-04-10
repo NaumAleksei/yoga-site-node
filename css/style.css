@@ -830,3 +830,122 @@ nav a:hover { color: var(--primary-color); }
     .guide-img-side { display: none; } /* На мобилках скрываем картинку, чтобы не мешала форме */
     .guide-form-side { padding: 30px 20px; text-align: center; }
 }
+
+/* --- ПЛАВАЮЩИЕ КОНТАКТЫ (ИСПРАВЛЕНО) --- */
+
+.floating-contacts {
+    position: fixed;
+    top: 50%;
+    right: 20px;
+    transform: translateY(-50%);
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    z-index: 9999; /* Подняли слой выше всех */
+}
+
+/* Общие стили для кружочков */
+.contact-bubble {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-color: #fff;
+    color: #333;
+    font-size: 1.4rem;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+    transition: all 0.3s ease;
+    text-decoration: none;
+    
+    /* СБРОС СТИЛЕЙ КНОПКИ (Критично для <button>) */
+    border: none !important;    /* Убираем рамку */
+    outline: none !important;   /* Убираем синий контур при клике */
+    padding: 0;                 /* Убираем внутренние отступы */
+    cursor: pointer;
+    appearance: none;
+    -webkit-appearance: none;
+}
+
+/* Эффект при наведении (общий) */
+.contact-bubble:hover {
+    transform: scale(1.1);
+    box-shadow: 0 6px 15px rgba(0,0,0,0.25);
+}
+
+/* ТЕЛЕФОН: Инверсия (Черный фон, белая трубка) */
+.contact-bubble.phone:hover {
+    background-color: #333 !important;
+}
+
+.contact-bubble.phone:hover i {
+    color: #fff !important; /* Гарантируем белый цвет иконки */
+}
+
+/* TELEGRAM: Синий */
+.contact-bubble.telegram:hover {
+    background-color: #0088cc !important;
+    color: #fff !important;
+}
+
+/* WHATSAPP: Зеленый */
+.contact-bubble.whatsapp:hover {
+    background-color: #25d366 !important;
+    color: #fff !important;
+}
+
+/* VK: Синий */
+.contact-bubble.vk:hover {
+    background-color: #0077ff !important;
+    color: #fff !important;
+}
+
+/* Адаптация под мобильные устройства */
+.desktop-only { display: flex; }
+.mobile-only { display: none; }
+
+@media (max-width: 768px) {
+    .floating-contacts {
+        bottom: 20px;
+        right: 10px;
+        gap: 10px;
+        top: auto; 
+        transform: none;
+    }
+    
+    .contact-bubble {
+        opacity: 0.8;
+        width: 40px;
+        height: 40px;
+        font-size: 1.2rem;
+    }
+    .contact-bubble:active {
+        opacity: 1;   /* При нажатии возвращаем полную яркость */
+        transform: scale(0.9); /* Легкий эффект вдавленности при клике */
+    }
+
+    .desktop-only { display: none; }
+    .mobile-only { display: flex; }
+}
+
+/* Стили формы обратного звонка */
+.callback-popup {
+    max-width: 350px;
+    padding: 30px;
+    border-radius: 15px; /* Скруглим углы для красоты */
+}
+
+#callback-form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+#callback-form input {
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-family: inherit;
+}
