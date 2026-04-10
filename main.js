@@ -49,7 +49,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const guideForm = document.getElementById('popupGuideForm');
 
     if (popup && closeBtn) {
-        let isPopupShown = localStorage.getItem('guideShown'); 
+        let isPopupShown = false; 
 
         const showPopup = () => {
             if (!isPopupShown) {
