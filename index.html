@@ -276,15 +276,20 @@
             <div id="register-anchor" style="padding-top: 80px;"></div>
 
             <div class="action-row">
-                <div class="contact-form-box">
-                    <h2>Записаться</h2>
-                    <form class="yoga-form">
-                        <input type="text" name="name" placeholder="Ваше имя" required>
-                        <input type="email" name="email" placeholder="Ваш Email" required>
-                        <input type="tel" name="phone" placeholder="Номер телефона" required>
-                        <button type="submit" class="cta-button">Отправить заявку</button>
-                    </form>
-                </div>
+               <div class="contact-form-box">
+    <h2>Записаться</h2>
+    <form class="yoga-form">
+        <input type="text" name="name" placeholder="Ваше имя" required>
+        <input type="email" name="email" placeholder="Ваш Email" required>
+        <input type="tel" name="phone" placeholder="Номер телефона" required>
+        
+        <div class="policy-link-inline">
+            Нажимая кнопку, вы даете <a href="/privacy.html" target="_blank">согласие на обработку персональных данных</a>
+        </div>
+        
+        <button type="submit" class="cta-button">Отправить заявку</button>
+    </form>
+</div>
 
                 <div class="contact-info-card">
                     <h2>Контакты</h2>
@@ -370,7 +375,10 @@
                     <input type="tel" name="userPhone" placeholder="Ваш телефон (Telegram)" required>
                     <button type="submit" class="cta-button">Получить PDF в Telegram</button>
                 </form>
-                <p class="popup-note">Отправим файл за 1 минуту</p>
+                
+                <div class="popup-note">
+                    Отправляя форму, вы соглашаетесь с <a href="/privacy.html" target="_blank">политикой конфиденциальности</a>
+                </div>
             </div>
         </div>
     </div>
@@ -414,8 +422,9 @@
 
 
 <footer class="site-footer">
-    <div class="container">
+    <div class="container" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap;">
         <p>&copy; 2026 Наумовы Марина и Алексей. Все права защищены.</p>
+        <p><a href="/privacy.html" target="_blank" style="font-size: 13px; color: #bbb; text-decoration: none;">Политика конфиденциальности</a></p>
     </div>
 </footer>
 

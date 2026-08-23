@@ -1027,3 +1027,30 @@ nav a:hover { color: var(--primary-color); }
 #callback-form .cta-button:active {
     transform: translateY(0);
 }
+/* --- СТИЛИ ДЛЯ ССЫЛОК И УВЕДОМЛЕНИЙ ПОЛИТИКИ КОНФИДЕНЦИАЛЬНОСТИ --- */
+.policy-link-inline {
+    font-size: 11px;
+    color: #777;
+    margin-top: 6px;
+    line-height: 1.4;
+    text-align: left;
+}
+
+.policy-link-inline a,
+.popup-note a {
+    color: var(--primary-color);
+    text-decoration: underline;
+    transition: var(--transition);
+}
+
+.policy-link-inline a:hover,
+.popup-note a:hover {
+    color: #333;
+}
+
+.popup-note {
+    font-size: 11px;
+    margin-top: 8px;
+    color: #666;
+    text-align: left;
+}
